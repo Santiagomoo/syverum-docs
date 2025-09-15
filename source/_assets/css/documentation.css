@@ -1,0 +1,81 @@
+.token.comment{
+  color: rgb(165, 165, 165)!important;
+  text-shadow: none!important;
+}
+
+.token.function{
+  color: rgb(255, 146, 146)!important;
+  text-shadow: none!important;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    color: rgb(241, 241, 241)!important;
+    background: none;
+    text-shadow: none!important;
+}
+
+.token.operator{
+  background-color: transparent!important;
+}
+.code-block,
+pre[class*="language-"]{
+  position: relative;
+  background: #0f172a!important;
+  color: #e5e7eb!important;
+  text-shadow:none;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  overflow: auto;
+  line-height: 1.6;
+}
+
+.code-lang-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 5.25rem;
+  font-size: 0.75rem;
+  background: rgba(148,163,184,0.15);
+  color: #cbd5e1;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+  background: rgba(148,163,184,0.15);
+  color: #e5e7eb;
+  border: 1px solid rgba(148,163,184,0.25);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.copy-btn:hover { background: rgba(148,163,184,0.25); }
+
+code:not([class]) {
+  background: #ffefef;
+  color: #200102;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.375rem;
+  font-size: 0.95em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #e5e7eb; /* gris claro */
+  padding: 0.75rem 1rem;
+}
+
+th {
+  background-color: #f9fafb; /* fondo header */
+  font-weight: 600;
+  text-align: left;
+}

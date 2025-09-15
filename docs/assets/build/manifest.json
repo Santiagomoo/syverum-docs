@@ -1,0 +1,19 @@
+{
+  "source/_assets/css/main.css": {
+    "file": "assets/main-BGAglPYt.css",
+    "src": "source/_assets/css/main.css",
+    "isEntry": true
+  },
+  "source/_assets/js/code.js": {
+    "file": "assets/code-l0sNRNKZ.js",
+    "name": "code",
+    "src": "source/_assets/js/code.js",
+    "isEntry": true
+  },
+  "source/_assets/js/main.js": {
+    "file": "assets/main-tKzq8g76.js",
+    "name": "main",
+    "src": "source/_assets/js/main.js",
+    "isEntry": true
+  }
+}
