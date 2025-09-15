@@ -20,7 +20,7 @@ This starter template includes a custom __404 Not Found__ error page, located at
 
     <hr class="block w-full max-w-lg mx-auto my-8 border">
 
-    <p class="text-xl">Need to update this page? See the <a title="404 Page Documentation" href="/docs/404"> documentation here</a>.</p>
+    <p class="text-xl">Need to update this page? See the <a title="404 Page Documentation" href="{{ $page->url('/docs/404') }}"> documentation here</a>.</p>
 </div>
 @endsection
 ```

@@ -37,8 +37,10 @@
     <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
 
     @viteRefresh()
-    <link rel="stylesheet" href="{{ vite('source/_assets/css/main.css') }}">
-    <script defer type="module" src="{{ vite('source/_assets/js/main.js') }}"></script>
+    <?php $viteCss = vite('source/_assets/css/main.css'); ?>
+    <?php $viteJs = vite('source/_assets/js/main.js'); ?>
+    <link rel="stylesheet" href="{{ $page->assetUrl($viteCss) }}">
+    <script defer type="module" src="{{ $page->assetUrl($viteJs) }}"></script>
 
     @if ($page->docsearchApiKey && $page->docsearchIndexName)
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />

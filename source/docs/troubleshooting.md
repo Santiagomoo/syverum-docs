@@ -31,5 +31,4 @@ section: content
 
 - Coloca `APP_DEBUG=true` en `.env` y recarga.
 
-Enlaza con: [Variables de entorno](/docs/env-config), [Ruteo](/docs/routing) y [Frontend](/docs/frontend-tailwind).
-
+Enlaza con: [Variables de entorno]({{ $page->url('/docs/env-config') }}), [Ruteo]({{ $page->url('/docs/routing') }}) y [Frontend]({{ $page->url('/docs/frontend-tailwind') }}).

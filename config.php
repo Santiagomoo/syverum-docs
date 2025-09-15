@@ -3,8 +3,10 @@
 use Illuminate\Support\Str;
 
 return [
-    'baseUrl' => 'https://santiagomoo.github.io/syverum-docs',
-    'production' => true,
+    // Para desarrollo local, dejar vacío y production=false.
+    // En GitHub Pages se sobreescribe en config.production.php
+    'baseUrl' => '',
+    'production' => false,
     'siteName' => 'Syverum Docs',
     'siteDescription' => 'Framework PHP liviano y modular con interfaz MVC.',
 
@@ -41,7 +43,22 @@ return [
             });
         }
     },
+    // Genera URLs absolutas respetando el baseUrl (útil para GitHub Pages)
     'url' => function ($page, $path) {
-        return Str::startsWith($path, 'http') ? $path : '/' . trimPath($path);
+        if (Str::startsWith($path, 'http')) {
+            return $path;
+        }
+        $base = rtrim($page->baseUrl ?? '', '/');
+        return ($base ? $base : '') . '/' . trimPath($path);
+    },
+
+    // Prefija baseUrl para assets compilados y estáticos
+    'assetUrl' => function ($page, $path) {
+        if (Str::startsWith($path, 'http')) {
+            return $path;
+        }
+        $base = rtrim($page->baseUrl ?? '', '/');
+        $clean = '/' . ltrim($path, '/');
+        return ($base ? $base : '') . $clean;
     },
 ];
