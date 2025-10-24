@@ -11,7 +11,7 @@
     <meta property="og:title" content="{{ $page->title ? $page->title . ' | ' : '' }}{{ $page->siteName }}" />
     <meta property="og:description" content="{{ $page->description ?? $page->siteDescription }}" />
     <meta property="og:url" content="{{ $page->getUrl() }}" />
-    <meta property="og:image" content="{{ $page->baseUrl }}/assets/img/logo.png" />
+    <meta property="og:image" content="{{ $page->assetUrl('/assets/img/logo.png') }}" />
     <meta property="og:type" content="website" />
 
     <meta name="twitter:image:alt" content="{{ $page->siteName }}">
@@ -23,7 +23,7 @@
 
     <title>{{ $page->siteName }}{{ $page->title ? ' | ' . $page->title : '' }}</title>
 
-    <link rel="home" href="{{ $page->baseUrl }}">
+    <link rel="home" href="{{ $page->url('/') }}">
 
     @stack('meta')
 
@@ -50,14 +50,16 @@
             --brand: {{ $page->theme['brand'] ?? '#dc2626' }};
             --brand-dark: {{ $page->theme['brandDark'] ?? '#991b1b' }};
             --sidebar-bg: {{ $page->theme['sidebarBg'] ?? '#f3f4f6' }};
+            --transition: .4s ease-int-out;
         }
 
         a {
-            color: var(--brand);
+            transition: var(--transition);
         }
 
-        a:hover {
-            color: var(--brand-dark);
+        /* Apply hover effect only to links that are not buttons or logo */
+        :not(li) > a:not(.btn-primary):not(.btn-secondary):not(.logo-link):hover {
+            background: var(--brand-dark);
         }
 
         .nav-menu {
@@ -118,8 +120,8 @@
     <header class="flex items-center shadow-sm bg-white border-b h-24 mb-8 py-4" role="banner">
         <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
             <div class="flex items-center">
-                <a href="{{ $page->baseUrl }}/" title="{{ $page->siteName }} home" class="inline-flex items-center">
-                <img class="h-8 md:h-10 mr-3" src="{{ $page->baseUrl }}/assets/img/logo.svg" alt="{{ $page->siteName }} logo" />
+                <a href="{{ $page->url('/') }}" title="{{ $page->siteName }} home" class="logo-link">
+                <img class="h-8 md:h-10 mr-3" src="{{ $page->assetUrl('/assets/img/logo.svg') }}" alt="{{ $page->siteName }} logo" />
                     <h1 class="text-lg md:text-2xl text-red-900 font-semibold hover:text-red-600 my-0 pr-4">
                         {{ $page->siteName }}</h1>
                 </a>
@@ -157,6 +159,51 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+    
+    <!-- Blade syntax highlighting for Prism.js -->
+    <script>
+        // Definir Blade como lenguaje personalizado para Prism.js
+        Prism.languages.blade = {
+            'comment': {
+                pattern: /{{--[\s\S]*?--}}/,
+                greedy: true
+            },
+            'directive': {
+                pattern: /@(?:if|elseif|else|endif|foreach|endforeach|for|endfor|while|endwhile|switch|case|break|default|endswitch|include|extends|section|endsection|yield|csrf|method|php|endphp|verbatim|endverbatim|auth|endauth|guest|endguest|can|endcan|cannot|endcannot|hasSection|yieldContent|stack|push|endpush|prepend|endprepend|once|endonce|error|enderror|each|endeach|unless|endunless|empty|endempty|isset|endisset|lang|choice|trans|trans_choice|json|dd|dump|var_dump|abort|abort_if|abort_unless|action|asset|config|env|event|factory|info|logger|method_field|mix|old|public_path|report|request|rescue|resolve|session|tap|throw_if|throw_unless|today|tomorrow|trait_uses_recursive|trait_uses_recursive|trans|trans_choice|validator|view|with|without)\b/,
+                alias: 'keyword'
+            },
+            'variable': {
+                pattern: /\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'unescaped': {
+                pattern: /\{\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'string': {
+                pattern: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/,
+                greedy: true
+            },
+            'number': /\b\d+(?:\.\d+)?\b/,
+            'operator': /[+\-*\/%=!<>&|^~]/,
+            'punctuation': /[{}[\];(),.:]/
+        };
+        
+        // Registrar Blade como lenguaje
+        Prism.languages.markup.tag.addInlined('blade', 'blade');
+        
+        // Aplicar resaltado a todos los bloques de código Blade
+        document.addEventListener('DOMContentLoaded', function() {
+            const bladeBlocks = document.querySelectorAll('code.language-blade');
+            bladeBlocks.forEach(function(block) {
+                Prism.highlightElement(block);
+            });
+        });
+    </script>
 
     @stack('scripts')
 </body>

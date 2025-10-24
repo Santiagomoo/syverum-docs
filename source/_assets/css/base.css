@@ -1,16 +1,8 @@
 body {
     font-size: 17px;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
-a {
-    @apply font-semibold;
-    @apply no-underline;
-    @apply text-red-600;
-
-    &:hover {
-        @apply text-red-800;
-    }
-}
 
 blockquote {
     @apply border-red-400;
@@ -43,22 +35,22 @@ h6 {
 
 h1 {
     @apply font-extrabold;
-    @apply text-5xl;
+    @apply text-xl;
 }
 
 h2 {
     @apply font-bold;
-    @apply text-4xl;
+    @apply text-lg;
 }
 
 h3 {
-    @apply font-bold;
-    @apply text-3xl;
+    @apply font-semibold;
+    @apply text-base;
 }
 
 h4 {
-    @apply font-normal;
-    @apply text-2xl;
+    @apply font-medium;
+    @apply text-sm;
 }
 
 h5 {
@@ -106,4 +98,43 @@ p {
 ::selection {
     @apply bg-red-500;
     @apply text-white;
+}
+
+/* Button Styles */
+.btn-primary {
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white;
+    background-color: var(--brand);
+    color: white;
+    transition: var(--transition, .4s ease-in-out);
+}
+
+.btn-primary:hover {
+    background-color: var(--brand-dark);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md;
+    background-color: #374151; /* gris mate */
+    color: white;
+    transition: var(--transition, .4s ease-in-out);
+}
+
+.btn-secondary:hover {
+    background-color: #1f2937; /* gris más oscuro */
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Exclude logo from button styles */
+.logo-link {
+    @apply inline-flex items-center;
+}
+
+.logo-link:hover {
+    background: none !important;
+    transform: none !important;
 }
