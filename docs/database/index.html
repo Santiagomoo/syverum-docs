@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Conéctate vía PDO y ejecuta consultas con helpers.">
+    <meta name="description" content="Configura la conexión a tu base de datos MySQL de forma sencilla y segura.">
 
     <meta property="og:site_name" content="Syverum Docs" />
-    <meta property="og:title" content="Base de datos | Syverum Docs" />
-    <meta property="og:description" content="Conéctate vía PDO y ejecuta consultas con helpers." />
+    <meta property="og:title" content="Configuración de Base de Datos | Syverum Docs" />
+    <meta property="og:description" content="Configura la conexión a tu base de datos MySQL de forma sencilla y segura." />
     <meta property="og:url" content="https://santiagomoo.github.io/syverum-docs/docs/database" />
     <meta property="og:image" content="https://santiagomoo.github.io/syverum-docs/assets/img/logo.png" />
     <meta property="og:type" content="website" />
@@ -18,7 +18,7 @@
     <meta name="twitter:card" content="summary_large_image">
 
     
-    <title>Syverum Docs | Base de datos</title>
+    <title>Syverum Docs | Configuración de Base de Datos</title>
 
     <link rel="home" href="https://santiagomoo.github.io/syverum-docs/">
 
@@ -30,22 +30,24 @@
     <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
 
-                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-BGAglPYt.css">
-    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-tKzq8g76.js"></script>
+                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-Pbbc4FuM.css">
+    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-l0sNRNKZ.js"></script>
 
         <style>
         :root {
             --brand: #da1717ff;
             --brand-dark: #470e0eff;
             --sidebar-bg: #ffffff;
+            --transition: .4s ease-int-out;
         }
 
         a {
-            color: var(--brand);
+            transition: var(--transition);
         }
 
-        a:hover {
-            color: var(--brand-dark);
+        /* Apply hover effect only to links that are not buttons or logo */
+        :not(li) > a:not(.btn-primary):not(.btn-secondary):not(.logo-link):hover {
+            background: var(--brand-dark);
         }
 
         .nav-menu {
@@ -106,7 +108,7 @@
     <header class="flex items-center shadow-sm bg-white border-b h-24 mb-8 py-4" role="banner">
         <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
             <div class="flex items-center">
-                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="inline-flex items-center">
+                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="logo-link">
                 <img class="h-8 md:h-10 mr-3" src="https://santiagomoo.github.io/syverum-docs/assets/img/logo.svg" alt="Syverum Docs logo" />
                     <h1 class="text-lg md:text-2xl text-red-900 font-semibold hover:text-red-600 my-0 pr-4">
                         Syverum Docs</h1>
@@ -155,7 +157,7 @@
         <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            ¿Qué es SyverumX?
+            ¿Qué es Syverum?
         </a>
     
     </li>
@@ -209,19 +211,19 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/views-blade"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/models"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            Vistas (Blade)
+            Modelos
         </a>
     
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/http-globals"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/views-blade"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            HTTP / Globals
+            Vistas (Blade)
         </a>
     
     </li>
@@ -236,24 +238,6 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/facades"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Facades
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/env-config"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Variables de entorno (.env)
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
         <a href="https://santiagomoo.github.io/syverum-docs/docs/database"
             class="lvl1  active font-semibold text-red-500 nav-menu__item hover:text-red-500"
         >
@@ -263,28 +247,10 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/panel-monitoring"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/dependency-injection"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            Panel de monitoreo
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/cli"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            CLI
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/frontend-tailwind"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Frontend (Tailwind)
+            Inyección de dependencias
         </a>
     
     </li>
@@ -315,15 +281,6 @@
             class="lvl1   nav-menu__item hover:text-red-500"
         >
             FAQ
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/releases"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Notas de versión
         </a>
     
     </li>
@@ -360,34 +317,470 @@
         </nav>
 
         <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
-            <h1>Base de datos</h1>
+            <h1>Configuración de Base de Datos</h1>
 
-<p>Syverum expone una capa mínima sobre PDO para conexión y consultas.</p>
+<div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-green-700">
+                <strong>Conexión MySQL:</strong> Syverum incluye un sistema de conexión a base de datos MySQL integrado que se configura automáticamente usando variables de entorno.
+            </p>
+        </div>
+    </div>
+</div>
 
-<h2>Configuración</h2>
+<p>Syverum utiliza PDO para la conexión a base de datos y se configura automáticamente al iniciar la aplicación. Solo necesitas definir las variables de entorno correctas y el framework se encargará del resto.</p>
 
-<p><code>DatabaseService</code> lee <code>.env</code> y llama a <code>Connection::configure()</code>:</p>
+<hr />
 
-<pre><code class="language-dotenv">DB_CONNECTION=mysql
+<h2>Configuración con Variables de Entorno</h2>
+
+<h3>Archivo .env</h3>
+
+<p>Crea un archivo <code>.env</code> en la raíz de tu proyecto con la configuración de tu base de datos:</p>
+
+<pre><code class="language-bash"># Configuración de Base de Datos
+DB_DRIVER=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=syverum
-DB_USERNAME=root
-DB_PASSWORD=
+DB_NAME=mi_aplicacion
+DB_USER=usuario
+DB_PASS=contraseña_segura
 </code></pre>
 
-<h2>Consultas</h2>
+<h3>Variables de entorno disponibles</h3>
 
-<pre><code class="language-php">use Core\Database\Database;
+<table>
+<thead>
+<tr>
+  <th>Variable</th>
+  <th>Descripción</th>
+  <th>Valor por defecto</th>
+  <th>Requerido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>DB_DRIVER</code></td>
+  <td>Driver de base de datos</td>
+  <td><code>mysql</code></td>
+  <td>No</td>
+</tr>
+<tr>
+  <td><code>DB_HOST</code></td>
+  <td>Host del servidor</td>
+  <td><code>127.0.0.1</code></td>
+  <td>No</td>
+</tr>
+<tr>
+  <td><code>DB_PORT</code></td>
+  <td>Puerto del servidor</td>
+  <td><code>3306</code></td>
+  <td>No</td>
+</tr>
+<tr>
+  <td><code>DB_NAME</code></td>
+  <td>Nombre de la base de datos</td>
+  <td><code>null</code></td>
+  <td><strong>Sí</strong></td>
+</tr>
+<tr>
+  <td><code>DB_USER</code></td>
+  <td>Usuario de la base de datos</td>
+  <td><code>null</code></td>
+  <td><strong>Sí</strong></td>
+</tr>
+<tr>
+  <td><code>DB_PASS</code></td>
+  <td>Contraseña del usuario</td>
+  <td><code>null</code></td>
+  <td><strong>Sí</strong></td>
+</tr>
+</tbody>
+</table>
 
-$users = Database::query('SELECT * FROM users WHERE active = ?', [1]);
+<hr />
 
-Database::execute('INSERT INTO users (name) VALUES (?)', ['Ana']);
+<h2>Configuración Automática</h2>
+
+<p>El framework carga automáticamente la configuración de base de datos al iniciar la aplicación:</p>
+
+<pre><code class="language-php">// src/core/Support/Database/ServiceProvider.php
+public function register(ContainerInterface $container): void
+{
+    $config = [
+        'driver' =&gt; getenv('DB_DRIVER') ?: 'mysql',
+        'host' =&gt; getenv('DB_HOST') ?: '127.0.0.1',
+        'port' =&gt; getenv('DB_PORT') ?: '3306',
+        'database' =&gt; getenv('DB_NAME') ?: null,
+        'username' =&gt; getenv('DB_USER') ?: null,
+        'password' =&gt; getenv('DB_PASS') ?: null,
+    ];
+
+    Connection::configure($config);
+}
 </code></pre>
 
-<h2>Depuración</h2>
+<hr />
 
-<p><code>Connection::getDebugInfo()</code> expone estado de conexión cuando el panel está activo.</p>
+<h2>Validación de Configuración</h2>
+
+<h3>Verificar conexión</h3>
+
+<p>El framework valida automáticamente que todos los parámetros requeridos estén presentes:</p>
+
+<pre><code class="language-php">// Validación automática en Connection::configure()
+if (empty(self::$database['driver']) ||
+    empty(self::$database['host']) ||
+    empty(self::$database['database']) ||
+    empty(self::$database['username'])) {
+
+    self::$database['error'] = 'Faltan datos de conexión. No se intentó conectar.';
+}
+</code></pre>
+
+<h3>Verificar estado de conexión</h3>
+
+<p>Puedes verificar el estado de la conexión usando el método de debug:</p>
+
+<pre><code class="language-php">use Core\Services\Database\Connection;
+
+// Obtener información de debug de la conexión
+$debugInfo = Connection::getDebugInfo();
+
+/*
+Retorna un array con:
+[
+    'connected' =&gt; true/false,
+    'driver' =&gt; 'mysql',
+    'host' =&gt; '127.0.0.1',
+    'port' =&gt; '3306',
+    'database' =&gt; 'mi_aplicacion',
+    'username' =&gt; 'usuario',
+    'password' =&gt; '***', // Oculto por seguridad
+    'error' =&gt; null o mensaje de error
+]
+*/
+</code></pre>
+
+<hr />
+
+<h2>Configuraciones por Entorno</h2>
+
+<h3>Desarrollo Local</h3>
+
+<pre><code class="language-bash"># .env (desarrollo)
+DB_DRIVER=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=mi_app_dev
+DB_USER=root
+DB_PASS=
+</code></pre>
+
+<h3>Producción</h3>
+
+<pre><code class="language-bash"># .env (producción)
+DB_DRIVER=mysql
+DB_HOST=mi-servidor.com
+DB_PORT=3306
+DB_NAME=mi_app_prod
+DB_USER=usuario_prod
+DB_PASS=contraseña_super_segura_123
+</code></pre>
+
+<h3>Testing</h3>
+
+<pre><code class="language-bash"># .env.testing
+DB_DRIVER=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=mi_app_test
+DB_USER=test_user
+DB_PASS=test_password
+</code></pre>
+
+<hr />
+
+<h2>Configuración Manual (Opcional)</h2>
+
+<p>Si necesitas configurar la base de datos manualmente en lugar de usar variables de entorno:</p>
+
+<pre><code class="language-php">&lt;?php
+declare(strict_types=1);
+
+namespace App\Providers;
+
+use Core\Support\DI\Contracts\ContainerInterface;
+use Core\Support\DI\Contracts\ServiceProviderInterface;
+use Core\Services\Database\Connection;
+
+class DatabaseServiceProvider implements ServiceProviderInterface
+{
+    public function register(ContainerInterface $container): void
+    {
+        // Configuración manual
+        $config = [
+            'driver' =&gt; 'mysql',
+            'host' =&gt; 'localhost',
+            'port' =&gt; '3306',
+            'database' =&gt; 'mi_aplicacion',
+            'username' =&gt; 'mi_usuario',
+            'password' =&gt; 'mi_contraseña',
+        ];
+
+        Connection::configure($config);
+    }
+}
+</code></pre>
+
+<hr />
+
+<h2>Manejo de Errores</h2>
+
+<h3>Errores de configuración</h3>
+
+<p>El framework maneja automáticamente los errores de configuración:</p>
+
+<pre><code class="language-php">// Si faltan parámetros requeridos
+$error = Connection::getDebugInfo()['error'];
+// "Faltan datos de conexión. No se intentó conectar."
+
+// Si el driver no es soportado
+$error = Connection::getDebugInfo()['error'];
+// "Driver de base de datos no soportado: postgresql"
+</code></pre>
+
+<h3>Errores de conexión</h3>
+
+<pre><code class="language-php">// Si la conexión falla
+$error = Connection::getDebugInfo()['error'];
+// "Error al conectar: SQLSTATE[HY000] [1045] Access denied for user..."
+</code></pre>
+
+<hr />
+
+<h2>Verificación de Conexión</h2>
+
+<h3>Script de verificación</h3>
+
+<p>Crea un script simple para verificar que tu configuración funciona:</p>
+
+<pre><code class="language-php">&lt;?php
+// verify-db.php
+
+require_once 'vendor/autoload.php';
+
+use Core\Services\Database\Connection;
+use Core\Services\Database\Database;
+
+try {
+    // Configurar conexión
+    $config = [
+        'driver' =&gt; 'mysql',
+        'host' =&gt; '127.0.0.1',
+        'port' =&gt; '3306',
+        'database' =&gt; 'mi_aplicacion',
+        'username' =&gt; 'usuario',
+        'password' =&gt; 'contraseña',
+    ];
+
+    Connection::configure($config);
+
+    // Verificar conexión
+    $pdo = Database::pdo();
+
+    if ($pdo) {
+        echo "✅ Conexión exitosa a la base de datos\n";
+
+        // Probar consulta simple
+        $result = Database::selectOne('SELECT 1 as test');
+        echo "✅ Consulta de prueba exitosa: " . json_encode($result) . "\n";
+    } else {
+        echo "❌ Error de conexión\n";
+        $debug = Connection::getDebugInfo();
+        echo "Error: " . $debug['error'] . "\n";
+    }
+
+} catch (Exception $e) {
+    echo "❌ Error: " . $e-&gt;getMessage() . "\n";
+}
+</code></pre>
+
+<h3>Ejecutar verificación</h3>
+
+<pre><code class="language-bash">php verify-db.php
+</code></pre>
+
+<hr />
+
+<h2>Configuración Avanzada</h2>
+
+<h3>Múltiples conexiones</h3>
+
+<p>Aunque Syverum está diseñado para una sola conexión por defecto, puedes extender la funcionalidad:</p>
+
+<pre><code class="language-php">&lt;?php
+declare(strict_types=1);
+
+namespace App\Services;
+
+use Core\Services\Database\Connection;
+use PDO;
+
+class DatabaseManager
+{
+    private static array $connections = [];
+
+    public static function addConnection(string $name, array $config): void
+    {
+        // Crear nueva instancia de conexión para múltiples DBs
+        $connection = new class($config) {
+            private ?PDO $pdo = null;
+            private array $config;
+
+            public function __construct(array $config)
+            {
+                $this-&gt;config = $config;
+            }
+
+            public function getPdo(): ?PDO
+            {
+                if ($this-&gt;pdo === null) {
+                    $this-&gt;connect();
+                }
+                return $this-&gt;pdo;
+            }
+
+            private function connect(): void
+            {
+                $dsn = "mysql:host={$this-&gt;config['host']};port={$this-&gt;config['port']};dbname={$this-&gt;config['database']};charset=utf8mb4";
+                $this-&gt;pdo = new PDO($dsn, $this-&gt;config['username'], $this-&gt;config['password'], [
+                    PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE =&gt; PDO::FETCH_ASSOC,
+                ]);
+            }
+        };
+
+        self::$connections[$name] = $connection;
+    }
+
+    public static function connection(string $name = 'default')
+    {
+        return self::$connections[$name] ?? null;
+    }
+}
+
+// Uso:
+DatabaseManager::addConnection('default', [
+    'host' =&gt; '127.0.0.1',
+    'port' =&gt; '3306',
+    'database' =&gt; 'app_main',
+    'username' =&gt; 'user1',
+    'password' =&gt; 'pass1',
+]);
+
+DatabaseManager::addConnection('analytics', [
+    'host' =&gt; '127.0.0.1',
+    'port' =&gt; '3306',
+    'database' =&gt; 'app_analytics',
+    'username' =&gt; 'user2',
+    'password' =&gt; 'pass2',
+]);
+</code></pre>
+
+<hr />
+
+<h2>Mejores Prácticas</h2>
+
+<div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-blue-700">
+                <strong>💡 Consejos para configuración de base de datos:</strong>
+            </p>
+            <ul class="text-sm text-blue-700 mt-2 list-disc list-inside">
+                <li><strong>Variables de entorno:</strong> Nunca hardcodees credenciales en el código</li>
+                <li><strong>Archivo .env:</strong> Mantén el archivo .env fuera del control de versiones</li>
+                <li><strong>Contraseñas seguras:</strong> Usa contraseñas complejas en producción</li>
+                <li><strong>Usuarios específicos:</strong> Crea usuarios de DB con permisos mínimos necesarios</li>
+                <li><strong>Backup regular:</strong> Configura backups automáticos de tu base de datos</li>
+                <li><strong>Monitoreo:</strong> Supervisa el rendimiento y estado de la conexión</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h2>Troubleshooting</h2>
+
+<p>Problemas comunes y soluciones:</strong> Esta sección te ayudará a resolver los errores más frecuentes al configurar la base de datos en Syverum.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <h4 class="font-semibold text-yellow-800 mb-2">❌ "Faltan datos de conexión"</h4>
+        <ul class="text-sm text-yellow-700 space-y-1">
+            <li>Verifica que todas las variables requeridas estén definidas en `.env`</li>
+            <li>Asegúrate de que el archivo `.env` esté en la raíz del proyecto</li>
+        </ul>
+    </div>
+    
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+        <h4 class="font-semibold text-red-800 mb-2">❌ "Access denied for user"</h4>
+        <ul class="text-sm text-red-700 space-y-1">
+            <li>Verifica las credenciales de usuario y contraseña</li>
+            <li>Asegúrate de que el usuario tenga permisos para acceder a la base de datos</li>
+        </ul>
+    </div>
+    
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+        <h4 class="font-semibold text-red-800 mb-2">❌ "Unknown database"</h4>
+        <ul class="text-sm text-red-700 space-y-1">
+            <li>Verifica que el nombre de la base de datos sea correcto</li>
+            <li>Asegúrate de que la base de datos exista en el servidor</li>
+        </ul>
+    </div>
+    
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+        <h4 class="font-semibold text-red-800 mb-2">❌ "Connection refused"</h4>
+        <ul class="text-sm text-red-700 space-y-1">
+            <li>Verifica que el host y puerto sean correctos</li>
+            <li>Asegúrate de que el servidor MySQL esté ejecutándose</li>
+        </ul>
+    </div>
+</div>
+
+<div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-blue-700">
+                <strong>💡 Tip:</strong> Si sigues teniendo problemas, revisa los logs de la aplicación o usa el script de verificación que se muestra en la sección anterior.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h2>Siguiente paso</h2>
+
+<div class="text-center">
+    <a href="/docs/dependency-injection" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
+        Inyección de dependencias
+        <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </a>
+</div>
+
+<hr />
+
+<div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 text-center">
+    <p class="text-gray-700">
+        <strong>💡 Tip:</strong> Una vez configurada la base de datos, aprende sobre el sistema de inyección de dependencias para gestionar tus servicios y dependencias de forma elegante.
+    </p>
+</div>
         </div>
     </div>
 </section>
@@ -411,6 +804,51 @@ Database::execute('INSERT INTO users (name) VALUES (?)', ['Ana']);
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+    
+    <!-- Blade syntax highlighting for Prism.js -->
+    <script>
+        // Definir Blade como lenguaje personalizado para Prism.js
+        Prism.languages.blade = {
+            'comment': {
+                pattern: //,
+                greedy: true
+            },
+            'directive': {
+                pattern: /@(?:if|elseif|else|endif|foreach|endforeach|for|endfor|while|endwhile|switch|case|break|default|endswitch|include|extends|section|endsection|yield|csrf|method|php|endphp|verbatim|endverbatim|auth|endauth|guest|endguest|can|endcan|cannot|endcannot|hasSection|yieldContent|stack|push|endpush|prepend|endprepend|once|endonce|error|enderror|each|endeach|unless|endunless|empty|endempty|isset|endisset|lang|choice|trans|trans_choice|json|dd|dump|var_dump|abort|abort_if|abort_unless|action|asset|config|env|event|factory|info|logger|method_field|mix|old|public_path|report|request|rescue|resolve|session|tap|throw_if|throw_unless|today|tomorrow|trait_uses_recursive|trait_uses_recursive|trans|trans_choice|validator|view|with|without)\b/,
+                alias: 'keyword'
+            },
+            'variable': {
+                pattern: /\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'unescaped': {
+                pattern: /\{\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'string': {
+                pattern: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/,
+                greedy: true
+            },
+            'number': /\b\d+(?:\.\d+)?\b/,
+            'operator': /[+\-*\/%=!<>&|^~]/,
+            'punctuation': /[{}[\];(),.:]/
+        };
+        
+        // Registrar Blade como lenguaje
+        Prism.languages.markup.tag.addInlined('blade', 'blade');
+        
+        // Aplicar resaltado a todos los bloques de código Blade
+        document.addEventListener('DOMContentLoaded', function() {
+            const bladeBlocks = document.querySelectorAll('code.language-blade');
+            bladeBlocks.forEach(function(block) {
+                Prism.highlightElement(block);
+            });
+        });
+    </script>
 
     <script>
     const navMenu = {

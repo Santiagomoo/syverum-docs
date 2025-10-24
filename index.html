@@ -30,22 +30,24 @@
     <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
 
-                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-BGAglPYt.css">
-    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-tKzq8g76.js"></script>
+                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-Pbbc4FuM.css">
+    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-l0sNRNKZ.js"></script>
 
         <style>
         :root {
             --brand: #da1717ff;
             --brand-dark: #470e0eff;
             --sidebar-bg: #ffffff;
+            --transition: .4s ease-int-out;
         }
 
         a {
-            color: var(--brand);
+            transition: var(--transition);
         }
 
-        a:hover {
-            color: var(--brand-dark);
+        /* Apply hover effect only to links that are not buttons or logo */
+        :not(li) > a:not(.btn-primary):not(.btn-secondary):not(.logo-link):hover {
+            background: var(--brand-dark);
         }
 
         .nav-menu {
@@ -106,7 +108,7 @@
     <header class="flex items-center shadow-sm bg-white border-b h-24 mb-8 py-4" role="banner">
         <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
             <div class="flex items-center">
-                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="inline-flex items-center">
+                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="logo-link">
                 <img class="h-8 md:h-10 mr-3" src="https://santiagomoo.github.io/syverum-docs/assets/img/logo.svg" alt="Syverum Docs logo" />
                     <h1 class="text-lg md:text-2xl text-red-900 font-semibold hover:text-red-600 my-0 pr-4">
                         Syverum Docs</h1>
@@ -127,14 +129,11 @@
 
                 <h2 id="intro-powered-by-jigsaw" class="font-light mt-4">Framework PHP liviano y modular con interfaz MVC.</h2>
 
-                <p class="text-lg">Documentación oficial de SyverumX. Un framework PHP liviano y modular para construir apps
-                    web con ruteo expresivo, controladores simples y vistas Blade‑like.</p>
+                <p class="text-lg">Framework PHP moderno y fácil de usar. Construye aplicaciones web rápidamente con herramientas que ya conoces y una estructura clara que te ayuda a organizar tu código.</p>
 
                 <div class="flex my-10">
-                    <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started" class="font-normal text-white hover:bg-red-950 rounded-sm mr-4 py-2 px-6"
-                        style="background: var(--brand); color:rgb(253, 232, 232)">Empezar</a>
-                    <a href="https://santiagomoo.github.io/syverum-docs/docs/installation"
-                        class="bg-gray-300 hover:bg-gray-500 font-normal rounded-sm py-2 px-6" style="color: rgb(43, 43, 43)!important;">Instalación</a>
+                    <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started" class="btn-primary mr-4">Empezar</a>
+                    <a href="https://santiagomoo.github.io/syverum-docs/docs/installation" class="btn-secondary">Instalación</a>
                 </div>
             </div>
 
@@ -145,23 +144,41 @@
 
         <div class="md:flex -mx-4">
             <div class="mb-8 mx-3 px-2 md:w-1/3">
-                <img src="https://santiagomoo.github.io/syverum-docs/assets/img/icon-window.svg" class="h-12 w-12" alt="window icon">
-                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">Vistas Blade</h3>
-                <p>Usa plantillas tipo Blade con Jenssegers\Blade y helpers sencillos para renderizar vistas.</p>
+                <img src="https://santiagomoo.github.io/syverum-docs/assets/img/icon-terminal.svg" class="h-12 w-12" alt="terminal icon">
+                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">Ruteo Simple</h3>
+                <p>Define tus rutas fácilmente con <code>Route::get()</code>, <code>Route::post()</code> y más. Agrega middleware y nombres de ruta cuando los necesites.</p>
             </div>
 
             <div class="mb-8 mx-3 px-2 md:w-1/3">
-                <img src="https://santiagomoo.github.io/syverum-docs/assets/img/icon-terminal.svg" class="h-12 w-12" alt="terminal icon">
-                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">Ruteo expresivo</h3>
-                <p>Define rutas con <code>Route::get()</code> y nombres de ruta. Encadena <code>name()</code> y
-                    <code>middleware()</code> para cubrir casos comunes.</p>
+                <img src="https://santiagomoo.github.io/syverum-docs/assets/img/icon-window.svg" class="h-12 w-12" alt="window icon">
+                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">Plantillas Blade</h3>
+                <p>Crea vistas hermosas con la sintaxis Blade que ya conoces. Layouts, componentes y helpers incluidos para desarrollo rápido.</p>
             </div>
 
             <div class="mx-3 px-2 md:w-1/3">
                 <img src="https://santiagomoo.github.io/syverum-docs/assets/img/icon-stack.svg" class="h-12 w-12" alt="stack icon">
-                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">CSS utilitario</h3>
-                <p>Integra Tailwind con el CLI oficial. Compila con <code>npx @tailwindcss/cli</code> en modo watch o build.
-                </p>
+                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">Controladores</h3>
+                <p>Organiza tu lógica en controladores limpios. El framework se encarga de inyectar dependencias automáticamente.</p>
+            </div>
+        </div>
+
+        <div class="md:flex -mx-4 mt-8">
+            <div class="mb-8 mx-3 px-2 md:w-1/3">
+                <img src="https://santiagomoo.github.io/syverum-docs/assets/img/icon-terminal.svg" class="h-12 w-12" alt="terminal icon">
+                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">Base de Datos</h3>
+                <p>Conecta fácilmente con MySQL usando PDO. Incluye modelos simples para trabajar con tus datos de forma intuitiva.</p>
+            </div>
+
+            <div class="mb-8 mx-3 px-2 md:w-1/3">
+                <img src="https://santiagomoo.github.io/syverum-docs/assets/img/icon-stack.svg" class="h-12 w-12" alt="stack icon">
+                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">Middleware</h3>
+                <p>Protege tus rutas con middleware. Autenticación, validación y más. Fácil de usar y personalizar.</p>
+            </div>
+
+            <div class="mx-3 px-2 md:w-1/3">
+                <img src="https://santiagomoo.github.io/syverum-docs/assets/img/icon-window.svg" class="h-12 w-12" alt="window icon">
+                <h3 class="text-2xl mb-0" style="color: var(--brand-dark)">Configuración</h3>
+                <p>Configura tu aplicación con archivos <code>.env</code>. Variables de entorno, base de datos y más, todo en un lugar.</p>
             </div>
         </div>
     </section>
@@ -185,6 +202,51 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+    
+    <!-- Blade syntax highlighting for Prism.js -->
+    <script>
+        // Definir Blade como lenguaje personalizado para Prism.js
+        Prism.languages.blade = {
+            'comment': {
+                pattern: //,
+                greedy: true
+            },
+            'directive': {
+                pattern: /@(?:if|elseif|else|endif|foreach|endforeach|for|endfor|while|endwhile|switch|case|break|default|endswitch|include|extends|section|endsection|yield|csrf|method|php|endphp|verbatim|endverbatim|auth|endauth|guest|endguest|can|endcan|cannot|endcannot|hasSection|yieldContent|stack|push|endpush|prepend|endprepend|once|endonce|error|enderror|each|endeach|unless|endunless|empty|endempty|isset|endisset|lang|choice|trans|trans_choice|json|dd|dump|var_dump|abort|abort_if|abort_unless|action|asset|config|env|event|factory|info|logger|method_field|mix|old|public_path|report|request|rescue|resolve|session|tap|throw_if|throw_unless|today|tomorrow|trait_uses_recursive|trait_uses_recursive|trans|trans_choice|validator|view|with|without)\b/,
+                alias: 'keyword'
+            },
+            'variable': {
+                pattern: /\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'unescaped': {
+                pattern: /\{\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'string': {
+                pattern: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/,
+                greedy: true
+            },
+            'number': /\b\d+(?:\.\d+)?\b/,
+            'operator': /[+\-*\/%=!<>&|^~]/,
+            'punctuation': /[{}[\];(),.:]/
+        };
+        
+        // Registrar Blade como lenguaje
+        Prism.languages.markup.tag.addInlined('blade', 'blade');
+        
+        // Aplicar resaltado a todos los bloques de código Blade
+        document.addEventListener('DOMContentLoaded', function() {
+            const bladeBlocks = document.querySelectorAll('code.language-blade');
+            bladeBlocks.forEach(function(block) {
+                Prism.highlightElement(block);
+            });
+        });
+    </script>
 
     </body>
 

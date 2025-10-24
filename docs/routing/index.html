@@ -30,22 +30,24 @@
     <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
 
-                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-BGAglPYt.css">
-    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-tKzq8g76.js"></script>
+                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-Pbbc4FuM.css">
+    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-l0sNRNKZ.js"></script>
 
         <style>
         :root {
             --brand: #da1717ff;
             --brand-dark: #470e0eff;
             --sidebar-bg: #ffffff;
+            --transition: .4s ease-int-out;
         }
 
         a {
-            color: var(--brand);
+            transition: var(--transition);
         }
 
-        a:hover {
-            color: var(--brand-dark);
+        /* Apply hover effect only to links that are not buttons or logo */
+        :not(li) > a:not(.btn-primary):not(.btn-secondary):not(.logo-link):hover {
+            background: var(--brand-dark);
         }
 
         .nav-menu {
@@ -106,7 +108,7 @@
     <header class="flex items-center shadow-sm bg-white border-b h-24 mb-8 py-4" role="banner">
         <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
             <div class="flex items-center">
-                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="inline-flex items-center">
+                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="logo-link">
                 <img class="h-8 md:h-10 mr-3" src="https://santiagomoo.github.io/syverum-docs/assets/img/logo.svg" alt="Syverum Docs logo" />
                     <h1 class="text-lg md:text-2xl text-red-900 font-semibold hover:text-red-600 my-0 pr-4">
                         Syverum Docs</h1>
@@ -155,7 +157,7 @@
         <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            ¿Qué es SyverumX?
+            ¿Qué es Syverum?
         </a>
     
     </li>
@@ -209,19 +211,19 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/views-blade"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/models"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            Vistas (Blade)
+            Modelos
         </a>
     
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/http-globals"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/views-blade"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            HTTP / Globals
+            Vistas (Blade)
         </a>
     
     </li>
@@ -236,24 +238,6 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/facades"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Facades
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/env-config"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Variables de entorno (.env)
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
         <a href="https://santiagomoo.github.io/syverum-docs/docs/database"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
@@ -263,28 +247,10 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/panel-monitoring"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/dependency-injection"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            Panel de monitoreo
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/cli"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            CLI
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/frontend-tailwind"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Frontend (Tailwind)
+            Inyección de dependencias
         </a>
     
     </li>
@@ -315,15 +281,6 @@
             class="lvl1   nav-menu__item hover:text-red-500"
         >
             FAQ
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/releases"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Notas de versión
         </a>
     
     </li>
@@ -362,57 +319,464 @@
         <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
             <h1>Rutas</h1>
 
-<p>En esta sección aprenderás a registrar rutas con la fachada <code>Route</code>, asignarles nombres y resolver URLs por nombre.</p>
+<div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-blue-700">
+                <strong>Ruteo expresivo:</strong> Syverum ofrece un sistema de rutas potente y flexible que te permite definir endpoints de forma clara y concisa.
+            </p>
+        </div>
+    </div>
+</div>
+
+<p>El sistema de rutas de Syverum te permite definir endpoints HTTP de manera expresiva, aplicar middleware, nombrar rutas y trabajar con parámetros dinámicos de forma intuitiva.</p>
 
 <hr />
 
-<h2>Ejemplo mínimo (<code>routes/web.php</code>)</h2>
+<h2>Definición básica de rutas</h2>
+
+<p>Las rutas en Syverum se definen usando el facade <code>Route</code> seguido del método HTTP correspondiente. Cada ruta especifica una URL y una función que se ejecutará cuando alguien visite esa URL.</p>
+
+<pre><code class="language-php">// Ruta GET para la página principal
+// Cuando alguien visite '/' (la raíz del sitio), ejecutará esta función
+Route::get('/', function() {
+    return '¡Hola desde Syverum!'; // Retorna un mensaje de texto plano
+});
+
+// Ruta GET para la página "Acerca de"
+// Esta ruta carga una vista Blade llamada 'about'
+Route::get('/about', function() {
+    return view('about'); // Retorna la vista 'about.blade.php'
+});
+
+// Ruta POST para el formulario de contacto
+// Se ejecuta cuando se envía un formulario a '/contact'
+Route::post('/contact', function() {
+    return 'Formulario enviado'; // Confirma que el formulario fue procesado
+});
+</code></pre>
+
+<hr />
+
+<h2>Métodos HTTP soportados</h2>
+
+<div class="grid md:grid-cols-2 gap-6 mb-8">
+    <div class="bg-white border border-gray-200 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-900" style="margin-bottom:20px!Important;">Métodos básicos</h3>
+        
+        <div class="space-y-3">
+            <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mr-3">
+                    GET
+                </span>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::get()</code>
+            </div>
+            
+            <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-3">
+                    POST
+                </span>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::post()</code>
+            </div>
+            
+            <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mr-3">
+                    PUT
+                </span>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::put()</code>
+            </div>
+            
+            <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 mr-3">
+                    PATCH
+                </span>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::patch()</code>
+            </div>
+            
+            <div class="flex items-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 mr-3">
+                    DELETE
+                </span>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::delete()</code>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Ejemplos de uso</h3>
+
+        <div class="space-y-3">
+            <div>
+                <p class="text-sm text-gray-600 mb-1">Página de inicio</p>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::get('/', ...)</code>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-600 mb-1">Formulario de contacto</p>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::post('/contact', ...)</code>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-600 mb-1">Actualizar perfil</p>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::put('/profile', ...)</code>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-600 mb-1">Eliminar artículo</p>
+                <code class="bg-gray-100 px-2 py-1 rounded text-sm">Route::delete('/posts/{id}', ...)</code>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr />
+
+<h2>Tipos de handlers</h2>
+
+<p>Los handlers son las funciones o métodos que se ejecutan cuando se accede a una ruta. Syverum soporta tres formas diferentes de definir handlers:</p>
+
+<h3>1. Closures (Funciones anónimas)</h3>
+
+<p>Las funciones anónimas son ideales para rutas simples que no requieren mucha lógica.</p>
+
+<pre><code class="language-php">// Usando una función anónima (closure)
+// Perfecto para rutas simples o pruebas rápidas
+Route::get('/welcome', function() {
+    return '¡Bienvenido!'; // Lógica simple directamente en la ruta
+});
+</code></pre>
+
+<h3>2. Controladores con sintaxis de array</h3>
+
+<p>Esta es la forma moderna y recomendada para usar controladores.</p>
+
+<pre><code class="language-php">// Sintaxis moderna usando array
+// 'UserController::class' obtiene el nombre completo de la clase
+// 'index' es el método que se ejecutará
+Route::get('/users', [UserController::class, 'index']);
+</code></pre>
+
+<h3>3. Controladores con sintaxis de string</h3>
+
+<p>Sintaxis más tradicional, pero menos recomendada en versiones modernas.</p>
+
+<pre><code class="language-php">// Sintaxis tradicional usando string
+// 'PostController@index' significa: clase PostController, método index
+Route::get('/posts', 'PostController@index');
+</code></pre>
+
+<hr />
+
+<h2>Parámetros de ruta</h2>
+
+<p>Los parámetros de ruta te permiten capturar segmentos de la URL y pasarlos como argumentos a tu función o controlador. Son muy útiles para crear URLs dinámicas.</p>
+
+<h3>Sintaxis básica</h3>
+
+<p>Los parámetros se definen usando llaves <code>{}</code> en la URL y se reciben como argumentos en la función.</p>
+
+<pre><code class="language-php">// Parámetro simple: captura el ID del usuario
+// La URL '/user/123' pasará '123' como parámetro $id
+Route::get('/user/{id}', function($id) {
+    return "Usuario: {$id}"; // Muestra el ID capturado
+});
+</code></pre>
+
+<pre><code class="language-php">// Parámetros múltiples: captura ID del post y ID del comentario
+// La URL '/posts/5/comments/12' pasará '5' como $id y '12' como $commentId
+Route::get('/posts/{id}/comments/{commentId}', function($id, $commentId) {
+    return "Post {$id}, Comentario {$commentId}"; // Muestra ambos parámetros
+});
+</code></pre>
+
+<h3>Ejemplos de URLs</h3>
+
+<ul>
+<li><strong>Perfil de usuario</strong>: <code>/user/{id}</code></li>
+<li><strong>Artículo específico</strong>: <code>/posts/{slug}</code></li>
+<li><strong>Categoría y producto</strong>: <code>/category/{cat}/product/{id}</code></li>
+</ul>
+
+<hr />
+
+<h2>Nombres de ruta</h2>
+
+<p>Los nombres de ruta te permiten referenciar rutas por un nombre en lugar de la URL completa. Esto es muy útil porque si cambias la URL, solo necesitas actualizarla en un lugar.</p>
+
+<h3>Definición con nombre</h3>
+
+<p>Usa el método <code>-&gt;name()</code> para asignar un nombre único a cada ruta.</p>
+
+<pre><code class="language-php">// Asigna el nombre 'home' a la ruta '/home'
+// Ahora puedes referenciar esta ruta usando route('home')
+Route::get('/home', function() {
+    return view('home');
+})-&gt;name('home');
+
+// Asigna el nombre 'about' a la ruta '/about'
+// Útil para generar enlaces en las vistas
+Route::get('/about', function() {
+    return view('about');
+})-&gt;name('about');
+</code></pre>
+
+<h3>Uso en vistas Blade</h3>
+
+<p>Los nombres de ruta son especialmente útiles en las vistas Blade para generar URLs dinámicamente.</p>
+
+<pre><code class="language-html">&lt;!-- Generar URL por nombre --&gt;
+&lt;!-- route('home') genera automáticamente la URL '/home' --&gt;
+&lt;a href="{{ route('home') }}"&gt;Inicio&lt;/a&gt;
+&lt;a href="{{ route('about') }}"&gt;Acerca de&lt;/a&gt;
+
+&lt;!-- Con parámetros --&gt;
+&lt;!-- Pasa parámetros como array asociativo --&gt;
+&lt;a href="{{ route('user.profile', ['id' =&gt; 123]) }}"&gt;
+    Perfil de Usuario
+&lt;/a&gt;
+</code></pre>
+
+<hr />
+
+<h2>Middleware</h2>
+
+<p>El middleware actúa como un filtro que se ejecuta antes de que la ruta procese la petición. Es perfecto para autenticación, autorización, validación y otras tareas comunes.</p>
+
+<h3>Middleware individual</h3>
+
+<p>Aplica un solo middleware a una ruta usando <code>-&gt;middleware()</code>.</p>
+
+<pre><code class="language-php">// Protege la ruta '/admin' con middleware de autenticación
+// Solo usuarios autenticados podrán acceder a esta ruta
+Route::get('/admin', function() {
+    return 'Panel de administración';
+})-&gt;middleware('auth'); // 'auth' verifica que el usuario esté logueado
+</code></pre>
+
+<h3>Múltiples middleware</h3>
+
+<p>Puedes aplicar varios middleware a una ruta pasándolos como argumentos separados.</p>
+
+<pre><code class="language-php">// Aplica dos middleware: autenticación y verificación de email
+// El usuario debe estar logueado Y tener email verificado
+Route::get('/dashboard', function() {
+    return 'Dashboard del usuario';
+})-&gt;middleware('auth', 'verified'); // 'verified' verifica el email
+</code></pre>
+
+<h3>Middleware con parámetros</h3>
+
+<p>Algunos middleware aceptan parámetros para personalizar su comportamiento.</p>
+
+<pre><code class="language-php">// Middleware de autenticación con parámetro 'admin'
+// Solo usuarios autenticados con rol 'admin' podrán acceder
+Route::get('/posts/{id}', function($id) {
+    return "Post {$id}";
+})-&gt;middleware('auth:admin'); // 'admin' es el parámetro del middleware
+</code></pre>
+
+<hr />
+
+<h2>API fluida (Method Chaining)</h2>
+
+<p>Syverum permite encadenar múltiples métodos en una sola declaración de ruta, haciendo el código más limpio y expresivo.</p>
+
+<h3>Encadenamiento de métodos</h3>
+
+<p>Puedes combinar múltiples operaciones en una sola línea usando el encadenamiento de métodos.</p>
+
+<pre><code class="language-php">// Encadenamiento completo: ruta + nombre + middleware
+// Define la ruta, le asigna un nombre y aplica dos middleware
+Route::get('/profile/{id}', [UserController::class, 'show'])
+    -&gt;name('user.profile')        // Asigna nombre para generar URLs
+    -&gt;middleware('auth', 'verified'); // Aplica autenticación y verificación
+</code></pre>
+
+<div class="mt-6 grid md:grid-cols-3 gap-4">
+    <div class="text-center">
+        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+        </div>
+        <h4 class="font-semibold text-gray-900">Ruta</h4>
+        <p class="text-sm text-gray-600">Define el endpoint</p>
+    </div>
+    
+    <div class="text-center">
+        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+            </svg>
+        </div>
+        <h4 class="font-semibold text-gray-900">Nombre</h4>
+        <p class="text-sm text-gray-600">Asigna un nombre</p>
+    </div>
+    
+    <div class="text-center">
+        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+        </div>
+        <h4 class="font-semibold text-gray-900">Middleware</h4>
+        <p class="text-sm text-gray-600">Aplica protección</p>
+    </div>
+</div>
+
+<hr />
+
+<h2>Ejemplos prácticos</h2>
+
+<p>Aquí tienes ejemplos completos de cómo estructurar las rutas para aplicaciones reales.</p>
+
+<h3>Blog simple</h3>
+
+<p>Este ejemplo muestra cómo estructurar las rutas para un blog básico con operaciones CRUD completas.</p>
 
 <pre><code class="language-php">&lt;?php
 
-use Core\Facades\Route;
-use App\Http\Controllers\HomeController;
+// Página de inicio - muestra todos los posts
+Route::get('/', [HomeController::class, 'index'])
+    -&gt;name('home'); // Nombre para generar enlaces
 
-Route::get('/', [HomeController::class, 'index'])-&gt;name('home');
-Route::post('/contact', [HomeController::class, 'send']);
+// Lista de artículos - página que muestra todos los posts
+Route::get('/posts', [PostController::class, 'index'])
+    -&gt;name('posts.index'); // Convención: recurso.index
+
+// Artículo individual - muestra un post específico usando slug
+Route::get('/posts/{slug}', [PostController::class, 'show'])
+    -&gt;name('posts.show'); // Convención: recurso.show
+
+// Crear artículo (solo autenticados) - formulario para crear post
+Route::get('/posts/create', [PostController::class, 'create'])
+    -&gt;name('posts.create')    // Nombre para el formulario
+    -&gt;middleware('auth');      // Solo usuarios logueados
+
+// Guardar artículo - procesa el formulario de creación
+Route::post('/posts', [PostController::class, 'store'])
+    -&gt;name('posts.store')      // Convención: recurso.store
+    -&gt;middleware('auth');      // Protegido por autenticación
+
+// Editar artículo - formulario para editar post existente
+Route::get('/posts/{id}/edit', [PostController::class, 'edit'])
+    -&gt;name('posts.edit')       // Convención: recurso.edit
+    -&gt;middleware('auth');      // Solo usuarios logueados
+
+// Actualizar artículo - procesa el formulario de edición
+Route::put('/posts/{id}', [PostController::class, 'update'])
+    -&gt;name('posts.update')     // Convención: recurso.update
+    -&gt;middleware('auth');      // Protegido por autenticación
+
+// Eliminar artículo - elimina un post específico
+Route::delete('/posts/{id}', [PostController::class, 'destroy'])
+    -&gt;name('posts.destroy')   // Convención: recurso.destroy
+    -&gt;middleware('auth');      // Solo usuarios logueados
+</code></pre>
+
+<h3>API REST</h3>
+
+<p>Este ejemplo muestra cómo crear una API REST completa para gestionar usuarios.</p>
+
+<pre><code class="language-php">&lt;?php
+
+// API de usuarios - conjunto completo de rutas REST
+// Todas las rutas están protegidas con middleware de API
+
+// Listar usuarios - GET /api/users
+Route::get('/api/users', [UserController::class, 'index'])
+    -&gt;name('api.users.index')      // Convención API: api.recurso.index
+    -&gt;middleware('auth:api');      // Autenticación por API token
+
+// Mostrar usuario específico - GET /api/users/{id}
+Route::get('/api/users/{id}', [UserController::class, 'show'])
+    -&gt;name('api.users.show')       // Convención API: api.recurso.show
+    -&gt;middleware('auth:api');      // Protegido con token de API
+
+// Crear usuario - POST /api/users
+Route::post('/api/users', [UserController::class, 'store'])
+    -&gt;name('api.users.store')      // Convención API: api.recurso.store
+    -&gt;middleware('auth:api');      // Requiere autenticación API
+
+// Actualizar usuario - PUT /api/users/{id}
+Route::put('/api/users/{id}', [UserController::class, 'update'])
+    -&gt;name('api.users.update')     // Convención API: api.recurso.update
+    -&gt;middleware('auth:api');      // Protegido con token de API
+
+// Eliminar usuario - DELETE /api/users/{id}
+Route::delete('/api/users/{id}', [UserController::class, 'destroy'])
+    -&gt;name('api.users.destroy')    // Convención API: api.recurso.destroy
+    -&gt;middleware('auth:api');      // Requiere autenticación API
 </code></pre>
 
 <hr />
 
-<p>La fachada <code>Route</code> delega en <code>RouteManager</code> y permite encadenar:</p>
+<h2>Helpers de URL</h2>
 
-<pre><code class="language-php">Route::get('/admin', [AdminController::class, 'dashboard'])
-    -&gt;name('admin.dashboard')
-    -&gt;middleware('AuthMiddleware');
+<p>Los helpers de URL te permiten generar URLs dinámicamente en tu aplicación, tanto en controladores como en vistas.</p>
+
+<h3>En controladores</h3>
+
+<p>Usa el <code>UrlGenerator</code> para generar URLs programáticamente en tus controladores.</p>
+
+<pre><code class="language-php">use Core\Support\Routing\UrlGenerator;
+
+class PostController
+{
+    // El UrlGenerator se inyecta automáticamente
+    public function show(UrlGenerator $urlGenerator)
+    {
+        // Genera la URL para editar el post con ID 123
+        $editUrl = $urlGenerator-&gt;route('posts.edit', ['id' =&gt; 123]);
+        // Resultado: '/posts/123/edit'
+
+        return view('post.show', compact('editUrl'));
+    }
+}
+</code></pre>
+
+<h3>En vistas Blade</h3>
+
+<p>Los helpers están disponibles globalmente en las vistas Blade para generar URLs dinámicamente.</p>
+
+<pre><code class="language-html">&lt;!-- Helper route() - genera URL por nombre de ruta --&gt;
+&lt;!-- Útil para crear enlaces dinámicos --&gt;
+&lt;a href="{{ route('posts.show', ['slug' =&gt; $post-&gt;slug]) }}"&gt;
+    {{ $post-&gt;title }}
+&lt;/a&gt;
+
+&lt;!-- Helper asset() - genera URL para archivos estáticos --&gt;
+&lt;!-- Útil para imágenes, CSS, JS --&gt;
+&lt;img src="{{ asset('images/logo.png') }}" alt="Logo"&gt;
+
+&lt;!-- Helper url() - genera URL absoluta --&gt;
+&lt;!-- Útil para formularios y enlaces externos --&gt;
+&lt;form action="{{ url('/contact') }}" method="POST"&gt;
+    &lt;!-- formulario --&gt;
+&lt;/form&gt;
 </code></pre>
 
 <hr />
 
-<h2>Resolver rutas por nombre</h2>
+<h2>Siguiente paso</h2>
 
-<p>En vistas puedes generar URLs con <code>route('nombre')</code>:</p>
-
-<pre><code class="language-php">&lt;a href="{{ route('home') }}"&gt;Inicio&lt;/a&gt;
-</code></pre>
-
-<hr />
-
-<h2>Buenas prácticas</h2>
-
-<ul>
-<li>Usa nombres de ruta consistentes (<code>seccion.recurso.accion</code>).</li>
-<li>Mantén controladores delgados; delega lógica al dominio/servicios.</li>
-<li>Emplea middlewares para autenticación/autorización.</li>
-</ul>
+<div class="text-center">
+    <a href="/docs/controllers" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
+        Controladores
+        <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </a>
+</div>
 
 <hr />
 
-<h2>Errores comunes</h2>
-
-<ul>
-<li>“Ruta no encontrada …”: verifica el método (GET/POST) y el endpoint exacto.</li>
-<li>“Método o clase no encontrada …”: revisa el nombre del método del controlador.</li>
-</ul>
+<div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 text-center">
+    <p class="text-gray-700">
+        <strong>💡 Tip:</strong> Usa nombres descriptivos para tus rutas. Esto hace que tu código sea más mantenible y las URLs más fáciles de generar.
+    </p>
+</div>
         </div>
     </div>
 </section>
@@ -436,6 +800,51 @@ Route::post('/contact', [HomeController::class, 'send']);
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+    
+    <!-- Blade syntax highlighting for Prism.js -->
+    <script>
+        // Definir Blade como lenguaje personalizado para Prism.js
+        Prism.languages.blade = {
+            'comment': {
+                pattern: //,
+                greedy: true
+            },
+            'directive': {
+                pattern: /@(?:if|elseif|else|endif|foreach|endforeach|for|endfor|while|endwhile|switch|case|break|default|endswitch|include|extends|section|endsection|yield|csrf|method|php|endphp|verbatim|endverbatim|auth|endauth|guest|endguest|can|endcan|cannot|endcannot|hasSection|yieldContent|stack|push|endpush|prepend|endprepend|once|endonce|error|enderror|each|endeach|unless|endunless|empty|endempty|isset|endisset|lang|choice|trans|trans_choice|json|dd|dump|var_dump|abort|abort_if|abort_unless|action|asset|config|env|event|factory|info|logger|method_field|mix|old|public_path|report|request|rescue|resolve|session|tap|throw_if|throw_unless|today|tomorrow|trait_uses_recursive|trait_uses_recursive|trans|trans_choice|validator|view|with|without)\b/,
+                alias: 'keyword'
+            },
+            'variable': {
+                pattern: /\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'unescaped': {
+                pattern: /\{\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'string': {
+                pattern: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/,
+                greedy: true
+            },
+            'number': /\b\d+(?:\.\d+)?\b/,
+            'operator': /[+\-*\/%=!<>&|^~]/,
+            'punctuation': /[{}[\];(),.:]/
+        };
+        
+        // Registrar Blade como lenguaje
+        Prism.languages.markup.tag.addInlined('blade', 'blade');
+        
+        // Aplicar resaltado a todos los bloques de código Blade
+        document.addEventListener('DOMContentLoaded', function() {
+            const bladeBlocks = document.querySelectorAll('code.language-blade');
+            bladeBlocks.forEach(function(block) {
+                Prism.highlightElement(block);
+            });
+        });
+    </script>
 
     <script>
     const navMenu = {

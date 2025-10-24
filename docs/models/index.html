@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Trabaja con modelos Eloquent para interactuar con tu base de datos de forma elegante.">
+
+    <meta property="og:site_name" content="Syverum Docs" />
+    <meta property="og:title" content="Modelos | Syverum Docs" />
+    <meta property="og:description" content="Trabaja con modelos Eloquent para interactuar con tu base de datos de forma elegante." />
+    <meta property="og:url" content="https://santiagomoo.github.io/syverum-docs/docs/models" />
+    <meta property="og:image" content="https://santiagomoo.github.io/syverum-docs/assets/img/logo.png" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:image:alt" content="Syverum Docs">
+    <meta name="twitter:card" content="summary_large_image">
+
+    
+    <title>Syverum Docs | Modelos</title>
+
+    <link rel="home" href="https://santiagomoo.github.io/syverum-docs/">
+
+    
+            <!-- Insert analytics code here -->
+    
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
+
+                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-Pbbc4FuM.css">
+    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-l0sNRNKZ.js"></script>
+
+        <style>
+        :root {
+            --brand: #da1717ff;
+            --brand-dark: #470e0eff;
+            --sidebar-bg: #ffffff;
+            --transition: .4s ease-int-out;
+        }
+
+        a {
+            transition: var(--transition);
+        }
+
+        /* Apply hover effect only to links that are not buttons or logo */
+        :not(li) > a:not(.btn-primary):not(.btn-secondary):not(.logo-link):hover {
+            background: var(--brand-dark);
+        }
+
+        .nav-menu {
+            background-color: var(--sidebar-bg);
+        }
+
+        .nav-menu__item {
+            color: rgb(59, 27, 27);
+            transition: .4s ease-int-out;
+        }
+
+        .nav-menu__item:hover {
+            color: var(--brand) !important;
+        }
+
+        blockquote {
+            border-color: var(--brand);
+            color: var(--brand-dark);
+        }
+
+        ::selection {
+            background: var(--brand);
+            color: #fff;
+        }
+
+        .brand-toggle {
+            background-color: var(--brand);
+            border-color: var(--brand);
+        }
+
+        .callout {
+            border-left: 4px solid var(--brand);
+            background: #fff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+        }
+
+        .callout.warning {
+            border-left-color: #f59e0b;
+            background: #fff7ed;
+        }
+
+        .callout.note {
+            border-left-color: var(--brand);
+            background: #fff;
+        }
+
+        .callout .title {
+            font-weight: 700;
+            margin-bottom: .25rem;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col justify-between min-h-screen text-gray-800 leading-normal font-sans">
+    <header class="flex items-center shadow-sm bg-white border-b h-24 mb-8 py-4" role="banner">
+        <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
+            <div class="flex items-center">
+                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="logo-link">
+                <img class="h-8 md:h-10 mr-3" src="https://santiagomoo.github.io/syverum-docs/assets/img/logo.svg" alt="Syverum Docs logo" />
+                    <h1 class="text-lg md:text-2xl text-red-900 font-semibold hover:text-red-600 my-0 pr-4">
+                        Syverum Docs</h1>
+                </a>
+            </div>
+
+            <div class="flex flex-1 justify-end items-center text-right md:pl-10">
+                            </div>
+        </div>
+
+            <button class="flex justify-center items-center brand-toggle h-10 mr-4 px-5 rounded-full lg:hidden focus:outline-hidden"
+    onclick="navMenu.toggle()"
+>
+    <svg id="js-nav-menu-show" xmlns="http://www.w3.org/2000/svg"
+        class="fill-current text-white h-9 w-4" viewBox="0 0 32 32"
+    >
+        <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/>
+    </svg>
+
+    <svg id="js-nav-menu-hide" xmlns="http://www.w3.org/2000/svg"
+        class="hidden fill-current text-white h-9 w-4" viewBox="0 0 36 30"
+    >
+        <polygon points="32.8,4.4 28.6,0.2 18,10.8 7.4,0.2 3.2,4.4 13.8,15 3.2,25.6 7.4,29.8 18,19.2 28.6,29.8 32.8,25.6 22.2,15 "/>
+    </svg>
+</button>
+
+    </header>
+
+    <main role="main" class="w-full flex-auto">
+        <section class="container max-w-8xl mx-auto px-6 md:px-8 py-4">
+    <div class="flex flex-col lg:flex-row">
+        <nav id="js-nav-menu" class="nav-menu hidden lg:block">
+            <ul class="my-0">
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Introducción
+        </a>
+    
+            
+        <ul class="my-0">
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            ¿Qué es Syverum?
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/installation"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Instalación
+        </a>
+    
+    </li>
+    </ul>
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/project-structure"
+            class="lvl0 lvl0-active  nav-menu__item hover:text-red-500"
+        >
+            Guía
+        </a>
+    
+            
+        <ul class="my-0">
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/project-structure"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Estructura del proyecto
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/routing"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Rutas
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/controllers"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Controladores
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/models"
+            class="lvl1  active font-semibold text-red-500 nav-menu__item hover:text-red-500"
+        >
+            Modelos
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/views-blade"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Vistas (Blade)
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/middlewares"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Middlewares
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/database"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Base de datos
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/dependency-injection"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Inyección de dependencias
+        </a>
+    
+    </li>
+    </ul>
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/troubleshooting"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Soporte
+        </a>
+    
+            
+        <ul class="my-0">
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/troubleshooting"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Solución de problemas
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/faq"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            FAQ
+        </a>
+    
+    </li>
+    </ul>
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://github.com/Santiagomoo/syverum-framework"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Repositorio (Framework)
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://github.com/Santiagomoo/syverum-installer"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Repositorio (Installer)
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://github.com/Santiagomoo/syverum-skeleton"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Repositorio (Skeleton)
+        </a>
+    
+    </li>
+    </ul>
+        </nav>
+
+        <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
+            <h1>Modelos</h1>
+
+<div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-green-700">
+                <strong>ORM Completo:</strong> Syverum incluye un sistema de modelos robusto que te permite trabajar con tu base de datos de forma elegante y segura, similar a Eloquent de Laravel pero más ligero.
+            </p>
+        </div>
+    </div>
+</div>
+
+<p>Los modelos en Syverum representan las tablas de tu base de datos y proporcionan una interfaz orientada a objetos para realizar operaciones CRUD. Actúan como una capa de abstracción entre tu aplicación y la base de datos, permitiéndote trabajar con datos de forma intuitiva.</p>
+
+<hr />
+
+<h2>Crear un modelo</h2>
+
+<p>Para crear un modelo en Syverum, puedes usar el comando Artisan que genera automáticamente la estructura básica de la clase con todas las propiedades necesarias. Este comando crea un archivo PHP en la carpeta <code>app/Models/</code> con el namespace correcto y la herencia de la clase base <code>Model</code>.</p>
+
+<p>El comando <code>make:model</code> es la forma más rápida y segura de crear modelos, ya que garantiza que sigan las convenciones del framework y tengan la estructura correcta desde el inicio. También puedes especificar un directorio personalizado si quieres organizar tus modelos en subcarpetas.</p>
+
+<div class="bg-gray-900 rounded-lg p-6 mb-8">
+    <div class="flex items-center mb-4">
+        <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <span class="text-gray-300 font-medium">Terminal</span>
+    </div>
+    <pre><code class="language-bash"># Crear un modelo básico
+syverum make:model User
+
+
+# Crear modelo en directorio específico
+syverum make:model Models/Product</code></pre>
+</div>
+
+<hr />
+
+<h2>Estructura básica de un modelo</h2>
+
+<p>Un modelo en Syverum extiende de la clase base <code>Model</code> y contiene todas las configuraciones necesarias para interactuar con tu tabla de base de datos. La estructura incluye propiedades para definir el nombre de la tabla, clave primaria, campos protegidos, y conversiones de tipos de datos.</p>
+
+<p>Cada propiedad tiene un propósito específico: <code>$table</code> define qué tabla usar, <code>$fillable</code> especifica qué campos se pueden asignar masivamente, <code>$casts</code> convierte automáticamente tipos de datos, y <code>$primaryKey</code> define la clave primaria si no es el estándar 'id'.</p>
+
+<p>Esta configuración te permite trabajar con cualquier estructura de base de datos de forma consistente, manteniendo la seguridad y proporcionando conversiones automáticas de tipos para una mejor experiencia de desarrollo.</p>
+
+<div class="bg-gray-900 rounded-lg p-6 mb-8">
+    <div class="flex items-center mb-4">
+        <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <span class="text-gray-300 font-medium">app/Models/User.php</span>
+    </div>
+    <pre><code class="language-php">&lt;?php
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Core\Support\Database\Model;
+
+class User extends Model
+{
+    // Nombre de la tabla (opcional - se infiere del nombre de la clase)
+    protected $table = 'users';
+    
+    // Clave primaria (por defecto es 'id')
+    protected $primaryKey = 'id';
+    
+    // Campos que se pueden asignar masivamente
+    protected $fillable = ['name', 'email', 'password'];
+    
+    // Conversión automática de tipos de datos
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'is_active' => 'boolean',
+        'settings' => 'json'
+    ];
+    
+    // Si la clave primaria es auto-incremental (por defecto true)
+    protected $incrementing = true;
+}</code></pre>
+</div>
+
+<hr />
+
+<h2>Propiedades del modelo</h2>
+
+<p>Las propiedades del modelo te permiten configurar cómo se comporta tu modelo con la base de datos. Estas configuraciones son fundamentales para la seguridad, el rendimiento y la funcionalidad de tu aplicación.</p>
+
+<h3>Configuración de tabla</h3>
+
+<p>La configuración de tabla te permite personalizar cómo tu modelo se conecta con la base de datos. Puedes especificar nombres de tabla personalizados, cambiar la clave primaria, o deshabilitar el auto-incremento según las necesidades de tu esquema de base de datos.</p>
+
+<p>Estas configuraciones son especialmente útiles cuando trabajas con bases de datos existentes que no siguen las convenciones estándar, o cuando necesitas integrar con sistemas legacy que tienen estructuras específicas.</p>
+
+<pre><code class="language-php">class User extends Model
+{
+    // Especificar nombre de tabla personalizado
+    protected $table = 'usuarios';
+
+    // Cambiar clave primaria
+    protected $primaryKey = 'user_id';
+
+    // Deshabilitar auto-incremento
+    protected $incrementing = false;
+}
+</code></pre>
+
+<h3>Protección de datos</h3>
+
+<p>La protección de datos es crucial para la seguridad de tu aplicación. La propiedad <code>$fillable</code> define qué campos pueden ser asignados masivamente (por ejemplo, desde formularios), mientras que <code>$guarded</code> especifica qué campos están protegidos contra asignación masiva.</p>
+
+<p>Esta protección previene ataques de asignación masiva donde un usuario malicioso podría intentar modificar campos sensibles como <code>id</code>, <code>role</code>, o <code>is_admin</code> enviando datos adicionales en formularios. Siempre define explícitamente qué campos son seguros para asignación masiva.</p>
+
+<pre><code class="language-php">class User extends Model
+{
+    // Campos que SÍ se pueden asignar masivamente
+    protected $fillable = [
+        'name', 
+        'email', 
+        'password',
+        'role'
+    ];
+
+    // Campos que NO se pueden asignar masivamente
+    protected $guarded = [
+        'id', 
+        'created_at', 
+        'updated_at'
+    ];
+}
+</code></pre>
+
+<h3>Conversión de tipos (Casting)</h3>
+
+<p>El casting automático de tipos te permite especificar cómo deben convertirse los datos cuando se obtienen de la base de datos o se guardan en ella. Esto es especialmente útil para campos JSON, booleanos, fechas y otros tipos de datos que necesitan conversión específica.</p>
+
+<p>Con el casting puedes trabajar con tipos de datos complejos de forma transparente: los arrays se convierten automáticamente a JSON para almacenamiento, los booleanos se manejan correctamente independientemente de cómo se almacenen en la base de datos, y las fechas se convierten a objetos DateTime para facilitar su manipulación.</p>
+
+<pre><code class="language-php">class User extends Model
+{
+    protected $casts = [
+        // Conversión a boolean
+        'is_active' =&gt; 'boolean',
+        'is_verified' =&gt; 'boolean',
+
+        // Conversión a enteros
+        'age' =&gt; 'integer',
+        'login_count' =&gt; 'integer',
+
+        // Conversión a float
+        'rating' =&gt; 'float',
+        'score' =&gt; 'double',
+
+        // Conversión a array
+        'preferences' =&gt; 'array',
+        'tags' =&gt; 'array',
+
+        // Conversión a JSON
+        'settings' =&gt; 'json',
+        'metadata' =&gt; 'json'
+    ];
+}
+</code></pre>
+
+<hr />
+
+<h2>Métodos estáticos para consultas</h2>
+
+<p>Los métodos estáticos te permiten realizar consultas directamente sobre el modelo sin necesidad de crear una instancia. Estos métodos son ideales para operaciones de lectura y búsqueda de datos, proporcionando una interfaz intuitiva para obtener información de la base de datos.</p>
+
+<h3>Obtener registros</h3>
+
+<p>Los métodos básicos de obtención de registros incluyen <code>all()</code> para obtener todos los registros, <code>first()</code> para el primer registro, <code>find()</code> para buscar por ID, y <code>findOrFail()</code> que lanza una excepción si no encuentra el registro. Estos métodos son la base para la mayoría de operaciones de consulta en tu aplicación.</p>
+
+<p>El método <code>findOrFail()</code> es especialmente útil porque maneja automáticamente el caso cuando un registro no existe, evitando que tengas que verificar manualmente si el resultado es null y proporcionando un manejo de errores consistente.</p>
+
+<pre><code class="language-php">// Obtener todos los usuarios
+$users = User::all();
+
+// Obtener usuarios con columnas específicas
+$users = User::all(['name', 'email']);
+
+// Obtener el primer registro
+$firstUser = User::first();
+
+// Buscar por ID
+$user = User::find(1);
+
+// Buscar por ID o lanzar excepción si no existe
+$user = User::findOrFail(1);
+
+// Buscar múltiples IDs
+$users = User::find([1, 2, 3]);
+</code></pre>
+
+<h3>Consultas con condiciones</h3>
+
+<p>Las consultas con condiciones te permiten filtrar los datos según criterios específicos usando el método <code>where()</code>. Puedes encadenar múltiples condiciones para crear consultas complejas que devuelvan exactamente los datos que necesitas.</p>
+
+<p>El método <code>where()</code> acepta diferentes tipos de operadores como <code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>like</code>, <code>in</code>, <code>not in</code>, entre otros. También puedes usar <code>orWhere()</code> para condiciones alternativas y agrupar condiciones con closures para crear lógica más compleja. Estas consultas son especialmente útiles para funcionalidades de búsqueda, filtrado de datos, y cuando necesitas obtener registros que cumplan criterios específicos.</p>
+
+<pre><code class="language-php">// Consultas básicas con where
+$activeUsers = User::where('active', true)-&gt;get();
+$adminUsers = User::where('role', 'admin')-&gt;get();
+
+// Múltiples condiciones
+$users = User::where('active', true)
+            -&gt;where('age', '&gt;', 18)
+            -&gt;get();
+
+// Condiciones OR
+$users = User::where('role', 'admin')
+            -&gt;orWhere('role', 'moderator')
+            -&gt;get();
+
+// Condiciones con operadores
+$users = User::where('age', '&gt;=', 21)
+            -&gt;where('age', '&lt;=', 65)
+            -&gt;get();
+
+// Condiciones LIKE
+$users = User::where('name', 'like', '%Juan%')-&gt;get();
+</code></pre>
+
+<h3>Ordenamiento y paginación</h3>
+
+<p>El ordenamiento te permite controlar el orden en que se devuelven los registros usando <code>orderBy()</code>, mientras que la paginación te ayuda a limitar la cantidad de resultados usando <code>limit()</code> y <code>offset()</code>. Estas funcionalidades son esenciales para crear interfaces de usuario eficientes y manejar grandes cantidades de datos.</p>
+
+<p>Con <code>orderBy()</code> puedes ordenar por una o múltiples columnas en orden ascendente (<code>asc</code>) o descendente (<code>desc</code>). Los métodos <code>limit()</code> y <code>offset()</code> te permiten implementar paginación manual, obteniendo solo una porción específica de los resultados totales. Estas técnicas son fundamentales para mejorar el rendimiento de tu aplicación, especialmente cuando trabajas con tablas que contienen miles o millones de registros.</p>
+
+<pre><code class="language-php">// Ordenar por una columna
+$users = User::orderBy('name', 'asc')-&gt;get();
+
+// Ordenar por múltiples columnas
+$users = User::orderBy('created_at', 'desc')
+            -&gt;orderBy('name', 'asc')
+            -&gt;get();
+
+// Limitar resultados
+$users = User::limit(10)-&gt;get();
+
+// Saltar registros (offset)
+$users = User::offset(20)-&gt;limit(10)-&gt;get();
+
+// Combinar ordenamiento y límites
+$recentUsers = User::orderBy('created_at', 'desc')
+                  -&gt;limit(5)
+                  -&gt;get();
+</code></pre>
+
+<h3>Agregaciones y conteos</h3>
+
+<p>Las funciones de agregación te permiten realizar cálculos estadísticos sobre tus datos sin necesidad de obtener todos los registros. Los métodos más comunes incluyen <code>count()</code> para contar registros, <code>exists()</code> para verificar existencia, y <code>value()</code> para obtener un valor específico de una columna.</p>
+
+<p>Estas funciones son muy eficientes porque se ejecutan directamente en la base de datos, evitando transferir grandes cantidades de datos a tu aplicación. Son ideales para crear dashboards, estadísticas, validaciones de existencia, y cualquier operación que requiera información resumida sobre tus datos. Los métodos de agregación son especialmente útiles cuando necesitas mostrar contadores en tu interfaz o validar que existen registros antes de realizar operaciones.</p>
+
+<pre><code class="language-php">// Contar registros
+$totalUsers = User::count();
+$activeUsers = User::where('active', true)-&gt;count();
+
+// Verificar si existe
+$hasUsers = User::exists();
+$hasActiveUsers = User::where('active', true)-&gt;exists();
+
+// Obtener un valor específico
+$oldestUser = User::orderBy('created_at', 'asc')-&gt;value('name');
+$latestEmail = User::orderBy('created_at', 'desc')-&gt;value('email');
+</code></pre>
+
+<hr />
+
+<h2>Query Builder avanzado</h2>
+
+<p>El Query Builder avanzado te permite crear consultas complejas usando el método <code>query()</code> que devuelve una instancia del constructor de consultas. Esto es especialmente útil cuando necesitas construir consultas dinámicas, usar subconsultas, o implementar lógica condicional compleja en tus consultas.</p>
+
+<p>Con el Query Builder puedes usar closures para agrupar condiciones, implementar consultas anidadas, y crear consultas que se adapten dinámicamente según los parámetros recibidos. También puedes obtener el SQL generado usando <code>toSql()</code> para debugging y optimización. Esta funcionalidad es ideal para reportes complejos, sistemas de filtrado avanzado, y cualquier situación donde las consultas simples no sean suficientes.</p>
+
+<h3>Consultas complejas</h3>
+
+<p>Las consultas complejas te permiten construir lógica de filtrado avanzada usando closures para agrupar condiciones y crear subconsultas. Esto es especialmente útil cuando necesitas implementar filtros dinámicos o lógica de negocio compleja que requiere múltiples condiciones anidadas.</p>
+
+<p>El método <code>toSql()</code> es invaluable para debugging, ya que te permite ver exactamente qué consulta SQL se está generando, lo cual es esencial para optimizar el rendimiento y resolver problemas de consultas complejas.</p>
+
+<pre><code class="language-php">// Consultas con ModelQuery
+$users = User::query()
+    -&gt;where('active', true)
+    -&gt;where(function($query) {
+        $query-&gt;where('role', 'admin')
+              -&gt;orWhere('role', 'moderator');
+    })
+    -&gt;orderBy('created_at', 'desc')
+    -&gt;limit(20)
+    -&gt;get();
+
+// Obtener SQL para debugging
+$sql = User::where('active', true)-&gt;toSql();
+echo $sql; // SELECT * FROM users WHERE active = :w0
+</code></pre>
+
+<h3>Métodos disponibles en ModelQuery</h3>
+
+<p>El ModelQuery proporciona una interfaz fluida para construir consultas paso a paso. Puedes encadenar múltiples métodos para crear consultas complejas de forma legible y mantenible. Cada método devuelve una nueva instancia del query builder, permitiendo el encadenamiento de métodos.</p>
+
+<p>Esta interfaz fluida hace que las consultas sean más fáciles de leer y mantener, especialmente cuando necesitas construir consultas dinámicas basadas en parámetros de usuario o condiciones de negocio complejas.</p>
+
+<pre><code class="language-php">$query = User::query();
+
+// Condiciones
+$query-&gt;where('column', 'value');
+$query-&gt;orWhere('column', 'value');
+$query-&gt;where('column', '&gt;', 10);
+
+// Ordenamiento
+$query-&gt;orderBy('name', 'asc');
+$query-&gt;orderBy('created_at', 'desc');
+
+// Límites
+$query-&gt;limit(10);
+$query-&gt;offset(20);
+
+// Ejecución
+$users = $query-&gt;get();
+$user = $query-&gt;first();
+$count = $query-&gt;count();
+$exists = $query-&gt;exists();
+$value = $query-&gt;value('column');
+
+// Debugging
+$sql = $query-&gt;toSql();
+</code></pre>
+
+<hr />
+
+<h2>Operaciones CRUD</h2>
+
+<p>Las operaciones CRUD (Create, Read, Update, Delete) son las operaciones fundamentales para manipular datos en cualquier aplicación. Syverum proporciona métodos intuitivos para realizar estas operaciones de forma segura y eficiente.</p>
+
+<p>Estas operaciones te permiten crear nuevos registros, leer datos existentes, actualizar información y eliminar registros cuando ya no son necesarios. Cada operación tiene métodos específicos que manejan automáticamente la validación, sanitización y persistencia de los datos en la base de datos.</p>
+
+<h3>Crear registros</h3>
+
+<p>Para crear nuevos registros en la base de datos, puedes usar el método <code>create()</code> que acepta un array de datos y los inserta directamente, o crear una nueva instancia del modelo y usar <code>save()</code>. El método <code>create()</code> es más directo para datos simples, mientras que crear una instancia te da más control sobre el proceso.</p>
+
+<p>También puedes usar <code>fill()</code> para asignar datos masivamente a una instancia existente antes de guardarla. Todos estos métodos manejan automáticamente la protección contra asignación masiva y la validación de datos según las reglas definidas en tu modelo.</p>
+
+<pre><code class="language-php">// Crear con datos específicos
+$user = User::create([
+    'name' =&gt; 'Juan Pérez',
+    'email' =&gt; 'juan@ejemplo.com',
+    'password' =&gt; password_hash('secret', PASSWORD_DEFAULT)
+]);
+
+// Crear instancia y luego guardar
+$user = new User();
+$user-&gt;name = 'María García';
+$user-&gt;email = 'maria@ejemplo.com';
+$user-&gt;save();
+
+// Llenar con datos del request
+$user = new User();
+$user-&gt;fill($request-&gt;body());
+$user-&gt;save();
+</code></pre>
+
+<h3>Actualizar registros</h3>
+
+<p>Para actualizar registros existentes, primero necesitas encontrar el registro usando <code>find()</code> o <code>findOrFail()</code>, y luego usar el método <code>update()</code> o modificar las propiedades directamente y llamar <code>save()</code>. El método <code>update()</code> es más eficiente para cambios masivos, mientras que modificar propiedades individuales te da más control granular.</p>
+
+<p>El método <code>fill()</code> también es útil para actualizaciones, ya que te permite asignar múltiples atributos de una vez antes de guardar. Todos estos métodos respetan las reglas de asignación masiva definidas en tu modelo y ejecutan automáticamente los eventos del modelo si están configurados.</p>
+
+<pre><code class="language-php">$user = User::findOrFail(1);
+
+// Actualizar con método update()
+$user-&gt;update([
+    'name' =&gt; 'Juan Actualizado',
+    'email' =&gt; 'juan.nuevo@ejemplo.com'
+]);
+
+// Actualizar propiedades individuales
+$user-&gt;name = 'Juan Actualizado';
+$user-&gt;email = 'juan.nuevo@ejemplo.com';
+$user-&gt;save();
+
+// Actualizar con fill()
+$user-&gt;fill($request-&gt;body());
+$user-&gt;save();
+</code></pre>
+
+<h3>Eliminar registros</h3>
+
+<p>La eliminación de registros se puede realizar de dos formas: eliminando una instancia específica usando <code>delete()</code> en el objeto, o eliminando múltiples registros usando consultas con <code>delete()</code>. El primer método es más seguro ya que trabajas con una instancia específica, mientras que el segundo es más eficiente para eliminaciones masivas.</p>
+
+<p>Es importante tener en cuenta que la eliminación es permanente por defecto, aunque puedes implementar soft deletes si necesitas mantener los registros para auditoría o recuperación. También puedes usar transacciones de base de datos para asegurar que las eliminaciones complejas se completen correctamente o se reviertan en caso de error.</p>
+
+<pre><code class="language-php">$user = User::findOrFail(1);
+
+// Eliminar registro
+$user-&gt;delete();
+
+// Eliminar múltiples registros con consulta
+$deletedCount = User::where('active', false)-&gt;delete();
+</code></pre>
+
+<hr />
+
+<h2>Métodos de instancia</h2>
+
+<p>Los métodos de instancia te permiten trabajar con objetos específicos del modelo una vez que los has obtenido de la base de datos. Estos métodos te dan acceso a información sobre el estado del modelo, sus atributos, y te permiten realizar operaciones específicas sobre esa instancia.</p>
+
+<p>Los métodos más útiles incluyen <code>exists()</code> para verificar si el modelo existe en la base de datos, <code>getAttribute()</code> y <code>setAttribute()</code> para acceder a los datos, <code>toArray()</code> para convertir el modelo a array, y <code>refresh()</code> para actualizar los datos desde la base de datos. Estos métodos son especialmente útiles cuando necesitas manipular datos específicos, verificar el estado de un modelo antes de realizar operaciones, o cuando trabajas con formularios que requieren acceso granular a los atributos del modelo.</p>
+
+<h3>Trabajar con atributos</h3>
+
+<p>Los métodos de atributos te permiten acceder y modificar los datos del modelo de forma controlada. Puedes usar <code>getAttribute()</code> y <code>setAttribute()</code> para acceso programático, o acceder directamente a las propiedades como <code>$user-&gt;name</code>. El método <code>getOriginal()</code> te permite obtener los valores originales antes de cualquier modificación, lo cual es útil para detectar cambios o implementar lógica de auditoría.</p>
+
+<p>El método <code>refresh()</code> es especialmente útil cuando necesitas asegurarte de que tienes los datos más actualizados de la base de datos, por ejemplo, después de que otro proceso haya modificado el registro.</p>
+
+<pre><code class="language-php">$user = User::findOrFail(1);
+
+// Obtener atributos
+$name = $user-&gt;getAttribute('name');
+$allAttributes = $user-&gt;getAttributes();
+
+// Establecer atributos
+$user-&gt;setAttribute('name', 'Nuevo nombre');
+
+// Acceso directo a propiedades
+$name = $user-&gt;name;
+$user-&gt;name = 'Nuevo nombre';
+
+// Verificar si existe
+if ($user-&gt;exists()) {
+    // El usuario existe en la base de datos
+}
+
+// Obtener datos originales (antes de cambios)
+$originalName = $user-&gt;getOriginal('name');
+$allOriginal = $user-&gt;getOriginal();
+
+// Refrescar desde la base de datos
+$user-&gt;refresh();
+</code></pre>
+
+<h3>Conversión de datos</h3>
+
+<p>Los métodos de conversión te permiten transformar el modelo en diferentes formatos según las necesidades de tu aplicación. El método <code>toArray()</code> convierte el modelo en un array asociativo, mientras que la implementación de <code>JsonSerializable</code> permite que el modelo se serialice automáticamente a JSON cuando uses <code>json_encode()</code>.</p>
+
+<p>La implementación de <code>ArrayAccess</code> te permite acceder al modelo como si fuera un array, usando sintaxis como <code>$user['name']</code> en lugar de <code>$user-&gt;name</code>. Esto es especialmente útil cuando trabajas con código que espera arrays o cuando necesitas compatibilidad con funciones que operan sobre arrays.</p>
+
+<pre><code class="language-php">$user = User::findOrFail(1);
+
+// Convertir a array
+$userArray = $user-&gt;toArray();
+
+// Convertir a JSON (implementa JsonSerializable)
+$json = json_encode($user);
+
+// Acceso como array (implementa ArrayAccess)
+$name = $user['name'];
+$user['name'] = 'Nuevo nombre';
+</code></pre>
+
+<hr />
+
+<h2>Integración con controladores</h2>
+
+<p>Los modelos se integran perfectamente con los controladores que viste en la sección anterior. Esta integración te permite crear aplicaciones robustas donde los controladores manejan la lógica de presentación y los modelos se encargan de la persistencia de datos.</p>
+
+<p>La separación de responsabilidades es clara: los controladores procesan las peticiones HTTP, validan datos, y coordinan las operaciones, mientras que los modelos encapsulan la lógica de acceso a datos y las reglas de negocio específicas de cada entidad. Esta arquitectura hace que tu código sea más mantenible, testeable y escalable.</p>
+
+<h3>Controlador básico con modelo</h3>
+
+<p>Los controladores utilizan los métodos estáticos de los modelos para realizar consultas y operaciones CRUD. Los métodos como <code>where()</code>, <code>orderBy()</code>, <code>limit()</code> y <code>get()</code> te permiten construir consultas complejas de forma fluida, mientras que <code>create()</code>, <code>update()</code> y <code>delete()</code> manejan las operaciones de escritura de forma segura.</p>
+
+<p>Esta integración es especialmente poderosa porque puedes encadenar múltiples métodos para crear consultas expresivas que son fáciles de leer y mantener, y que se ejecutan de forma eficiente en la base de datos.</p>
+
+<pre><code class="language-php">class UserController
+{
+    public function index(): Response
+    {
+        // Usar métodos estáticos del modelo
+        $users = User::where('active', true)
+                    -&gt;orderBy('created_at', 'desc')
+                    -&gt;limit(20)
+                    -&gt;get();
+
+        return view('users.index', compact('users'));
+    }
+
+    public function store(Request $request): Response
+    {
+        // Crear usuario usando el modelo
+        $user = User::create($request-&gt;body());
+
+        return json($user, 201);
+    }
+
+    public function show(string $id): Response
+    {
+        // Buscar usuario con manejo de errores
+        $user = User::findOrFail($id);
+
+        return view('users.show', compact('user'));
+    }
+}
+</code></pre>
+
+<h3>Validación y protección</h3>
+
+<p>La integración entre controladores y modelos incluye protección automática contra asignación masiva a través de la propiedad <code>$fillable</code> del modelo. Esto significa que cuando usas <code>create()</code> o <code>fill()</code> en el controlador, solo se asignarán los campos que están explícitamente permitidos en el modelo.</p>
+
+<p>Esta protección es crucial para la seguridad de tu aplicación, ya que previene que usuarios maliciosos modifiquen campos sensibles enviando datos adicionales en formularios. Siempre define explícitamente qué campos son seguros para asignación masiva en tus modelos, especialmente cuando trabajas con datos de usuarios.</p>
+
+<pre><code class="language-php">class UserController
+{
+    public function store(Request $request): Response
+    {
+        $data = $request-&gt;body();
+
+        // Solo campos fillable se asignarán
+        $user = User::create([
+            'name' =&gt; $data['name'],
+            'email' =&gt; $data['email'],
+            'password' =&gt; password_hash($data['password'], PASSWORD_DEFAULT)
+            // 'role' =&gt; 'admin' // Esto se ignorará si no está en $fillable
+        ]);
+
+        return json($user);
+    }
+}
+</code></pre>
+
+<hr />
+
+<h2>Ejemplo completo: Modelo de Blog</h2>
+
+<pre><code class="language-php">&lt;?php
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Core\Support\Database\Model;
+
+class Post extends Model
+{
+    protected $fillable = [
+        'title',
+        'content', 
+        'author_id',
+        'published',
+        'tags'
+    ];
+
+    protected $casts = [
+        'published' =&gt; 'boolean',
+        'tags' =&gt; 'array',
+        'created_at' =&gt; 'datetime'
+    ];
+
+    // Métodos personalizados
+    public function isPublished(): bool
+    {
+        return $this-&gt;published;
+    }
+
+    public function publish(): void
+    {
+        $this-&gt;update(['published' =&gt; true]);
+    }
+
+    public function unpublish(): void
+    {
+        $this-&gt;update(['published' =&gt; false]);
+    }
+
+    public function addTag(string $tag): void
+    {
+        $tags = $this-&gt;tags ?? [];
+        if (!in_array($tag, $tags)) {
+            $tags[] = $tag;
+            $this-&gt;update(['tags' =&gt; $tags]);
+        }
+    }
+}
+</code></pre>
+
+<h3>Uso en controlador</h3>
+
+<pre><code class="language-php">class PostController
+{
+    public function index(): Response
+    {
+        $posts = Post::where('published', true)
+                    -&gt;orderBy('created_at', 'desc')
+                    -&gt;limit(10)
+                    -&gt;get();
+
+        return view('posts.index', compact('posts'));
+    }
+
+    public function publish(string $id): Response
+    {
+        $post = Post::findOrFail($id);
+        $post-&gt;publish();
+
+        return Response::html('Post publicado');
+    }
+}
+</code></pre>
+
+<hr />
+
+<h2>Debugging y desarrollo</h2>
+
+<p>El debugging es una parte esencial del desarrollo con modelos, especialmente cuando trabajas con consultas complejas o necesitas optimizar el rendimiento de tu aplicación. Syverum proporciona herramientas útiles para inspeccionar las consultas SQL generadas y verificar el estado de tus modelos.</p>
+
+<h3>Obtener consultas SQL</h3>
+
+<p>El método <code>toSql()</code> es invaluable para debugging y optimización, ya que te permite ver exactamente qué consulta SQL se está generando. Esto es especialmente útil cuando necesitas optimizar consultas lentas, verificar que las condiciones se están aplicando correctamente, o cuando trabajas con consultas complejas que involucran múltiples condiciones y joins.</p>
+
+<p>Ver las consultas SQL también te ayuda a entender cómo el ORM traduce tus métodos PHP a consultas de base de datos, lo cual es fundamental para escribir código eficiente y evitar problemas de rendimiento.</p>
+
+<pre><code class="language-php">// Ver la consulta SQL generada
+$sql = User::where('active', true)-&gt;toSql();
+echo $sql; // SELECT * FROM users WHERE active = :w0
+
+// Ver consultas con parámetros
+$query = User::where('name', 'like', '%Juan%');
+echo $query-&gt;toSql(); // SELECT * FROM users WHERE name LIKE :w0
+</code></pre>
+
+<h3>Verificar existencia de modelos</h3>
+
+<p>La verificación de existencia es crucial para manejar casos donde los registros pueden no existir. El método <code>find()</code> devuelve <code>null</code> cuando no encuentra un registro, mientras que <code>findOrFail()</code> lanza una excepción, lo cual es útil para manejo automático de errores.</p>
+
+<p>Usar <code>findOrFail()</code> es especialmente recomendado en controladores porque proporciona un manejo de errores consistente y automático. Cuando un registro no existe, puedes capturar la excepción y devolver una respuesta HTTP apropiada (como 404 Not Found) sin tener que verificar manualmente si el resultado es null.</p>
+
+<pre><code class="language-php">$user = User::find(1);
+
+if ($user) {
+    // Usuario encontrado
+    echo "Usuario: " . $user-&gt;name;
+} else {
+    // Usuario no encontrado
+    echo "Usuario no existe";
+}
+
+// O usar findOrFail para manejo automático de errores
+try {
+    $user = User::findOrFail(999);
+} catch (RuntimeException $e) {
+    // Usuario no encontrado - manejar error
+    return Response::html('Usuario no encontrado', 404);
+}
+</code></pre>
+
+<hr />
+
+<h2>Mejores prácticas</h2>
+
+<div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-blue-700">
+                <strong>💡 Consejos para trabajar con modelos:</strong>
+            </p>
+            <ul class="text-sm text-blue-700 mt-2 list-disc list-inside">
+                <li><strong>Siempre define $fillable:</strong> Protege contra asignación masiva no deseada</li>
+                <li><strong>Usa $casts:</strong> Para conversión automática de tipos de datos</li>
+                <li><strong>Prefiere findOrFail():</strong> Para manejo automático de errores</li>
+                <li><strong>Métodos encadenados:</strong> Para consultas más legibles y mantenibles</li>
+                <li><strong>Validación:</strong> Implementa validación de datos antes de guardar</li>
+                <li><strong>Métodos personalizados:</strong> Agrega lógica de negocio específica a tus modelos</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h2>Siguiente paso</h2>
+
+<div class="text-center">
+    <a href="/docs/vistas" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
+        Vistas
+        <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </a>
+</div>
+
+<hr />
+
+<div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 text-center">
+    <p class="text-gray-700">
+        <strong>💡 Tip:</strong> Los modelos en Syverum proporcionan una interfaz elegante para trabajar con tu base de datos. Combínalos con los controladores para crear aplicaciones robustas y mantenibles.
+    </p>
+</div>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <footer class="bg-white text-center text-sm mt-12 py-4 border-t-1 border-gray-300" role="contentinfo">
+        <ul class="flex flex-col md:flex-row justify-center">
+            <li class="md:mr-2">
+                &copy; <a href="https://github.com/Santiagomoo/syverum-framework" title="SyverumX en GitHub">Syverum</a>
+                2025.
+            </li>
+
+            <li>
+                Construido con <a href="https://jigsaw.tighten.com/docs/installation/" title="Framework Syverum">Tighten</a>
+                y <a href="https://tailwindcss.com" title="Tailwind CSS, un framework CSS utility-first">Tailwind
+                    CSS</a>.
+            </li>
+        </ul>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+    
+    <!-- Blade syntax highlighting for Prism.js -->
+    <script>
+        // Definir Blade como lenguaje personalizado para Prism.js
+        Prism.languages.blade = {
+            'comment': {
+                pattern: //,
+                greedy: true
+            },
+            'directive': {
+                pattern: /@(?:if|elseif|else|endif|foreach|endforeach|for|endfor|while|endwhile|switch|case|break|default|endswitch|include|extends|section|endsection|yield|csrf|method|php|endphp|verbatim|endverbatim|auth|endauth|guest|endguest|can|endcan|cannot|endcannot|hasSection|yieldContent|stack|push|endpush|prepend|endprepend|once|endonce|error|enderror|each|endeach|unless|endunless|empty|endempty|isset|endisset|lang|choice|trans|trans_choice|json|dd|dump|var_dump|abort|abort_if|abort_unless|action|asset|config|env|event|factory|info|logger|method_field|mix|old|public_path|report|request|rescue|resolve|session|tap|throw_if|throw_unless|today|tomorrow|trait_uses_recursive|trait_uses_recursive|trans|trans_choice|validator|view|with|without)\b/,
+                alias: 'keyword'
+            },
+            'variable': {
+                pattern: /\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'unescaped': {
+                pattern: /\{\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'string': {
+                pattern: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/,
+                greedy: true
+            },
+            'number': /\b\d+(?:\.\d+)?\b/,
+            'operator': /[+\-*\/%=!<>&|^~]/,
+            'punctuation': /[{}[\];(),.:]/
+        };
+        
+        // Registrar Blade como lenguaje
+        Prism.languages.markup.tag.addInlined('blade', 'blade');
+        
+        // Aplicar resaltado a todos los bloques de código Blade
+        document.addEventListener('DOMContentLoaded', function() {
+            const bladeBlocks = document.querySelectorAll('code.language-blade');
+            bladeBlocks.forEach(function(block) {
+                Prism.highlightElement(block);
+            });
+        });
+    </script>
+
+    <script>
+    const navMenu = {
+        toggle() {
+            const menu = document.getElementById('js-nav-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('lg:block');
+            document.getElementById('js-nav-menu-hide').classList.toggle('hidden');
+            document.getElementById('js-nav-menu-show').classList.toggle('hidden');
+        },
+    }
+</script>
+</body>
+
+</html>

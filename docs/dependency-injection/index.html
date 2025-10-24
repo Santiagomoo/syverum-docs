@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Utiliza el contenedor de inyección de dependencias para gestionar servicios y resolver dependencias automáticamente.">
+
+    <meta property="og:site_name" content="Syverum Docs" />
+    <meta property="og:title" content="Inyección de Dependencias | Syverum Docs" />
+    <meta property="og:description" content="Utiliza el contenedor de inyección de dependencias para gestionar servicios y resolver dependencias automáticamente." />
+    <meta property="og:url" content="https://santiagomoo.github.io/syverum-docs/docs/dependency-injection" />
+    <meta property="og:image" content="https://santiagomoo.github.io/syverum-docs/assets/img/logo.png" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:image:alt" content="Syverum Docs">
+    <meta name="twitter:card" content="summary_large_image">
+
+    
+    <title>Syverum Docs | Inyección de Dependencias</title>
+
+    <link rel="home" href="https://santiagomoo.github.io/syverum-docs/">
+
+    
+            <!-- Insert analytics code here -->
+    
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
+
+                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-Pbbc4FuM.css">
+    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-l0sNRNKZ.js"></script>
+
+        <style>
+        :root {
+            --brand: #da1717ff;
+            --brand-dark: #470e0eff;
+            --sidebar-bg: #ffffff;
+            --transition: .4s ease-int-out;
+        }
+
+        a {
+            transition: var(--transition);
+        }
+
+        /* Apply hover effect only to links that are not buttons or logo */
+        :not(li) > a:not(.btn-primary):not(.btn-secondary):not(.logo-link):hover {
+            background: var(--brand-dark);
+        }
+
+        .nav-menu {
+            background-color: var(--sidebar-bg);
+        }
+
+        .nav-menu__item {
+            color: rgb(59, 27, 27);
+            transition: .4s ease-int-out;
+        }
+
+        .nav-menu__item:hover {
+            color: var(--brand) !important;
+        }
+
+        blockquote {
+            border-color: var(--brand);
+            color: var(--brand-dark);
+        }
+
+        ::selection {
+            background: var(--brand);
+            color: #fff;
+        }
+
+        .brand-toggle {
+            background-color: var(--brand);
+            border-color: var(--brand);
+        }
+
+        .callout {
+            border-left: 4px solid var(--brand);
+            background: #fff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+        }
+
+        .callout.warning {
+            border-left-color: #f59e0b;
+            background: #fff7ed;
+        }
+
+        .callout.note {
+            border-left-color: var(--brand);
+            background: #fff;
+        }
+
+        .callout .title {
+            font-weight: 700;
+            margin-bottom: .25rem;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col justify-between min-h-screen text-gray-800 leading-normal font-sans">
+    <header class="flex items-center shadow-sm bg-white border-b h-24 mb-8 py-4" role="banner">
+        <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
+            <div class="flex items-center">
+                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="logo-link">
+                <img class="h-8 md:h-10 mr-3" src="https://santiagomoo.github.io/syverum-docs/assets/img/logo.svg" alt="Syverum Docs logo" />
+                    <h1 class="text-lg md:text-2xl text-red-900 font-semibold hover:text-red-600 my-0 pr-4">
+                        Syverum Docs</h1>
+                </a>
+            </div>
+
+            <div class="flex flex-1 justify-end items-center text-right md:pl-10">
+                            </div>
+        </div>
+
+            <button class="flex justify-center items-center brand-toggle h-10 mr-4 px-5 rounded-full lg:hidden focus:outline-hidden"
+    onclick="navMenu.toggle()"
+>
+    <svg id="js-nav-menu-show" xmlns="http://www.w3.org/2000/svg"
+        class="fill-current text-white h-9 w-4" viewBox="0 0 32 32"
+    >
+        <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/>
+    </svg>
+
+    <svg id="js-nav-menu-hide" xmlns="http://www.w3.org/2000/svg"
+        class="hidden fill-current text-white h-9 w-4" viewBox="0 0 36 30"
+    >
+        <polygon points="32.8,4.4 28.6,0.2 18,10.8 7.4,0.2 3.2,4.4 13.8,15 3.2,25.6 7.4,29.8 18,19.2 28.6,29.8 32.8,25.6 22.2,15 "/>
+    </svg>
+</button>
+
+    </header>
+
+    <main role="main" class="w-full flex-auto">
+        <section class="container max-w-8xl mx-auto px-6 md:px-8 py-4">
+    <div class="flex flex-col lg:flex-row">
+        <nav id="js-nav-menu" class="nav-menu hidden lg:block">
+            <ul class="my-0">
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Introducción
+        </a>
+    
+            
+        <ul class="my-0">
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            ¿Qué es Syverum?
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/installation"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Instalación
+        </a>
+    
+    </li>
+    </ul>
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/project-structure"
+            class="lvl0 lvl0-active  nav-menu__item hover:text-red-500"
+        >
+            Guía
+        </a>
+    
+            
+        <ul class="my-0">
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/project-structure"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Estructura del proyecto
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/routing"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Rutas
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/controllers"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Controladores
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/models"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Modelos
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/views-blade"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Vistas (Blade)
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/middlewares"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Middlewares
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/database"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Base de datos
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/dependency-injection"
+            class="lvl1  active font-semibold text-red-500 nav-menu__item hover:text-red-500"
+        >
+            Inyección de dependencias
+        </a>
+    
+    </li>
+    </ul>
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/troubleshooting"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Soporte
+        </a>
+    
+            
+        <ul class="my-0">
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/troubleshooting"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            Solución de problemas
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/faq"
+            class="lvl1   nav-menu__item hover:text-red-500"
+        >
+            FAQ
+        </a>
+    
+    </li>
+    </ul>
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://github.com/Santiagomoo/syverum-framework"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Repositorio (Framework)
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://github.com/Santiagomoo/syverum-installer"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Repositorio (Installer)
+        </a>
+    
+    </li>
+            <li class="pl-4">
+            
+        <a href="https://github.com/Santiagomoo/syverum-skeleton"
+            class="lvl0   nav-menu__item hover:text-red-500"
+        >
+            Repositorio (Skeleton)
+        </a>
+    
+    </li>
+    </ul>
+        </nav>
+
+        <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
+            <h1>Inyección de Dependencias</h1>
+
+<div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-green-700">
+                <strong>Contenedor DI Completo:</strong> Syverum incluye un sistema robusto de inyección de dependencias con resolución automática, binding de servicios, singletons y más.
+            </p>
+        </div>
+    </div>
+</div>
+
+<p>El sistema de inyección de dependencias (DI) de Syverum te permite gestionar servicios, resolver dependencias automáticamente y mantener un código desacoplado y testeable. Es el corazón del framework y se integra con todos los componentes.</p>
+
+<hr />
+
+<h2>¿Qué es la Inyección de Dependencias?</h2>
+
+<p><strong>Imagina que eres un chef en un restaurante.</strong> En lugar de ir a la cocina cada vez que necesitas ingredientes, tienes un asistente que te trae todo lo que necesitas cuando lo pides. La inyección de dependencias funciona igual: en lugar de que tus clases vayan a buscar sus dependencias, el contenedor se las "inyecta" automáticamente.</p>
+
+<h3>El problema sin DI</h3>
+
+<pre><code class="language-php">// ❌ Sin inyección de dependencias - la clase crea sus propias dependencias
+class UserService 
+{
+    public function createUser($data) 
+    {
+        $database = new Database(); // Crear dependencia manualmente
+        $emailService = new EmailService(); // Crear dependencia manualmente
+
+        // Usar las dependencias...
+    }
+}
+</code></pre>
+
+<p><strong>Problemas:</strong> Difícil de testear, acoplado, no flexible.</p>
+
+<h3>La solución con DI</h3>
+
+<pre><code class="language-php">// ✅ Con inyección de dependencias - las dependencias se inyectan automáticamente
+class UserService 
+{
+    public function __construct(
+        private readonly Database $database,
+        private readonly EmailService $emailService
+    ) {}
+
+    public function createUser($data) 
+    {
+        // Las dependencias ya están disponibles
+        $this-&gt;database-&gt;save($data);
+        $this-&gt;emailService-&gt;sendWelcome($data['email']);
+    }
+}
+</code></pre>
+
+<p><strong>Beneficios:</strong> Fácil de testear, desacoplado, flexible.</p>
+
+<h3>Ventajas principales</h3>
+
+<ul>
+<li>✅ <strong>Modular</strong> - Cada componente es independiente y reutilizable</li>
+<li>✅ <strong>Testeable</strong> - Puedes inyectar mocks para pruebas unitarias</li>
+<li>✅ <strong>Mantenible</strong> - Cambios centralizados en el contenedor</li>
+<li>✅ <strong>Flexible</strong> - Puedes cambiar implementaciones fácilmente</li>
+</ul>
+
+<hr />
+
+<h2>Contenedor Principal</h2>
+
+<p><strong>El contenedor es como un almacén inteligente</strong> que sabe dónde está cada cosa y cómo entregártela cuando la necesites. Es el corazón del sistema de DI en Syverum.</p>
+
+<h3>¿Qué hace el contenedor?</h3>
+
+<ol>
+<li><strong>Registra servicios</strong> - Le dices qué clases están disponibles</li>
+<li><strong>Resuelve dependencias</strong> - Encuentra automáticamente las dependencias que necesita una clase</li>
+<li><strong>Gestiona instancias</strong> - Decide si crear una nueva instancia o reutilizar una existente</li>
+<li><strong>Inyecta dependencias</strong> - Pasa automáticamente las dependencias a los constructores</li>
+</ol>
+
+<h3>Acceso al contenedor</h3>
+
+<pre><code class="language-php">use Core\Support\DI\Contracts\ContainerInterface;
+use function Core\Support\DI\container;
+
+// Obtener el contenedor global
+$container = container();
+
+// O inyectar en constructores
+class MyService
+{
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {}
+}
+</code></pre>
+
+<h3>Métodos principales del contenedor</h3>
+
+<pre><code class="language-php">$container = container();
+
+// Verificar si existe un binding
+if ($container-&gt;has(MyService::class)) {
+    // El servicio está registrado
+}
+
+// Resolver un servicio
+$service = $container-&gt;make(MyService::class);
+
+// Alias de make()
+$service = $container-&gt;get(MyService::class);
+</code></pre>
+
+<hr />
+
+<h2>Binding de Servicios</h2>
+
+<p><strong>Binding es como registrar un servicio en el contenedor.</strong> Es como decirle al almacén: "Cuando alguien pida X, dale Y". Hay diferentes formas de hacerlo según tus necesidades.</p>
+
+<h3>Binding básico</h3>
+
+<p><strong>Es como decir:</strong> "Cuando pidan <code>MyService</code>, crea una nueva instancia de <code>MyService</code>"</p>
+
+<pre><code class="language-php">use function Core\Support\DI\bind;
+
+// Binding simple - nueva instancia cada vez
+bind(MyService::class, MyService::class);
+
+// Binding con clase diferente
+bind(PaymentInterface::class, StripePayment::class);
+
+// Binding con closure
+bind(EmailService::class, function($container) {
+    return new EmailService(
+        $container-&gt;make(SmtpConfig::class)
+    );
+});
+</code></pre>
+
+<h3>Singletons</h3>
+
+<p><strong>Los singletons son como tener un solo coche compartido en la familia.</strong> Todos usan la misma instancia, no se crea una nueva cada vez. Perfecto para servicios costosos como conexiones a base de datos o caché.</p>
+
+<pre><code class="language-php">use function Core\Support\DI\singleton;
+
+// Singleton - misma instancia siempre
+singleton(Database::class, Database::class);
+
+// Singleton con closure
+singleton(CacheService::class, function($container) {
+    return new RedisCache($container-&gt;make(RedisConfig::class));
+});
+</code></pre>
+
+<p><strong>¿Cuándo usar singletons?</strong>
+- Conexiones a base de datos
+- Servicios de caché
+- Configuraciones globales
+- Servicios que son costosos de crear</p>
+
+<h3>Instancias listas</h3>
+
+<p><strong>Es como traer tu propio objeto al almacén.</strong> Ya tienes algo creado y solo quieres que el contenedor lo entregue cuando alguien lo pida.</p>
+
+<pre><code class="language-php">use function Core\Support\DI\instance;
+
+// Registrar una instancia ya creada
+$config = new AppConfig(['debug' =&gt; true]);
+instance(AppConfig::class, $config);
+
+// O usando el contenedor directamente
+$container-&gt;instance('config', $config);
+</code></pre>
+
+<p><strong>¿Cuándo usar instancias?</strong>
+- Objetos que ya tienes creados
+- Configuraciones específicas
+- Objetos que necesitan inicialización manual</p>
+
+<hr />
+
+<h2>Resolución Automática (Autowiring)</h2>
+
+<p><strong>El autowiring es como tener un asistente súper inteligente</strong> que mira qué necesita tu clase y automáticamente busca y trae todas las dependencias necesarias. ¡No tienes que decirle qué traer!</p>
+
+<h3>¿Cómo funciona?</h3>
+
+<ol>
+<li>El contenedor mira el constructor de tu clase</li>
+<li>Ve qué tipos de parámetros necesita</li>
+<li>Busca esos tipos en sus registros</li>
+<li>Los crea automáticamente y los pasa al constructor</li>
+</ol>
+
+<h3>Inyección automática en constructores</h3>
+
+<pre><code class="language-php">class UserService
+{
+    public function __construct(
+        private readonly Database $database,
+        private readonly EmailService $emailService,
+        private readonly Logger $logger
+    ) {}
+}
+
+// El contenedor resuelve automáticamente todas las dependencias
+$userService = container()-&gt;make(UserService::class);
+</code></pre>
+
+<h3>Resolución de interfaces</h3>
+
+<p><strong>Las interfaces son como contratos.</strong> Le dices al contenedor: "Cuando alguien pida <code>PaymentInterface</code>, dale <code>StripePayment</code>". Esto te permite cambiar implementaciones fácilmente.</p>
+
+<pre><code class="language-php">// Registrar implementación de interfaz
+bind(PaymentInterface::class, StripePayment::class);
+
+class OrderService
+{
+    public function __construct(
+        private readonly PaymentInterface $payment // Se resuelve automáticamente
+    ) {}
+}
+
+// Si quieres cambiar a PayPal, solo cambias el binding:
+// bind(PaymentInterface::class, PayPalPayment::class);
+</code></pre>
+
+<p><strong>Ventajas de usar interfaces:</strong>
+- Fácil cambiar implementaciones
+- Código más testeable
+- Mejor desacoplamiento</p>
+
+<h3>Parámetros opcionales</h3>
+
+<p><strong>A veces no todas las dependencias son obligatorias.</strong> Puedes marcar algunas como opcionales usando <code>?</code> o valores por defecto.</p>
+
+<pre><code class="language-php">class NotificationService
+{
+    public function __construct(
+        private readonly EmailService $emailService,
+        private readonly ?SmsService $smsService = null // Opcional
+    ) {}
+
+    public function sendNotification($message) 
+    {
+        $this-&gt;emailService-&gt;send($message);
+
+        // Solo usar SMS si está disponible
+        if ($this-&gt;smsService) {
+            $this-&gt;smsService-&gt;send($message);
+        }
+    }
+}
+</code></pre>
+
+<p><strong>Casos de uso para parámetros opcionales:</strong>
+- Servicios que no siempre están disponibles
+- Funcionalidades premium
+- Servicios de desarrollo vs producción</p>
+
+<hr />
+
+<h2>Service Providers</h2>
+
+<p><strong>Los Service Providers son como organizadores de tu almacén.</strong> En lugar de registrar todos los servicios en un solo lugar, los organizas en diferentes "proveedores" según su función.</p>
+
+<h3>¿Qué son los Service Providers?</h3>
+
+<ul>
+<li><strong>Organizadores de bindings</strong> - Agrupan servicios relacionados</li>
+<li><strong>Puntos de configuración</strong> - Donde registras tus servicios</li>
+<li><strong>Modulares</strong> - Puedes activar/desactivar grupos de servicios</li>
+<li><strong>Reutilizables</strong> - Puedes usar los mismos providers en diferentes proyectos</li>
+</ul>
+
+<h3>Crear un Service Provider</h3>
+
+<pre><code class="language-php">&lt;?php
+declare(strict_types=1);
+
+namespace App\Providers;
+
+use Core\Support\DI\Contracts\ContainerInterface;
+use Core\Support\DI\Contracts\ServiceProviderInterface;
+use App\Services\EmailService;
+use App\Services\SmsService;
+
+class AppServiceProvider implements ServiceProviderInterface
+{
+    public function register(ContainerInterface $container): void
+    {
+        // Registrar servicios
+        $container-&gt;singleton(EmailService::class, function($container) {
+            return new EmailService(
+                $container-&gt;make(SmtpConfig::class)
+            );
+        });
+
+        $container-&gt;bind(SmsService::class, function($container) {
+            return new SmsService(
+                $container-&gt;make(TwilioConfig::class)
+            );
+        });
+
+        // Registrar aliases
+        $container-&gt;bind('email', EmailService::class);
+        $container-&gt;bind('sms', SmsService::class);
+    }
+}
+</code></pre>
+
+<h3>Registrar Service Providers</h3>
+
+<p><strong>Es como decirle al almacén qué organizadores usar.</strong> Le pasas una lista de providers y el contenedor los carga automáticamente.</p>
+
+<pre><code class="language-php">use Core\Support\DI\Factory;
+
+// En tu aplicación
+$container = Factory::build([
+    \App\Providers\AppServiceProvider::class,      // Servicios generales
+    \App\Providers\DatabaseServiceProvider::class, // Servicios de BD
+    \App\Providers\CacheServiceProvider::class,   // Servicios de caché
+]);
+
+// Ahora todos los servicios están registrados automáticamente
+</code></pre>
+
+<p><strong>Ventajas de usar Service Providers:</strong>
+- Organización clara de servicios
+- Fácil activar/desactivar funcionalidades
+- Reutilización entre proyectos
+- Configuración modular</p>
+
+<hr />
+
+<h2>Helpers de DI</h2>
+
+<p><strong>Los helpers son como atajos para usar el contenedor.</strong> En lugar de escribir <code>container()-&gt;make()</code>, puedes usar funciones más cortas y legibles.</p>
+
+<h3>Funciones helper disponibles</h3>
+
+<p><strong>Estas funciones hacen tu código más limpio y fácil de leer:</strong></p>
+
+<pre><code class="language-php">use function Core\Support\DI\{bind, singleton, instance, make, call};
+
+// Binding
+bind('service', MyService::class);
+singleton('cache', CacheService::class);
+instance('config', $configObject);
+
+// Resolución
+$service = make(MyService::class);
+$service = make(MyService::class, ['param' =&gt; 'value']);
+
+// Llamadas a métodos
+$result = call([MyService::class, 'method'], ['param' =&gt; 'value']);
+$result = call('MyService::method', ['param' =&gt; 'value']);
+</code></pre>
+
+<h3>Uso en controladores</h3>
+
+<p><strong>Los controladores son el lugar perfecto para usar DI.</strong> Puedes inyectar todos los servicios que necesitas y el framework los resuelve automáticamente.</p>
+
+<pre><code class="language-php">class UserController
+{
+    public function __construct(
+        private readonly UserService $userService,        // Servicio principal
+        private readonly EmailService $emailService,     // Servicio de email
+        private readonly ContainerInterface $container    // Contenedor para servicios dinámicos
+    ) {}
+
+    public function store(Request $request): Response
+    {
+        // Usar servicios inyectados directamente
+        $user = $this-&gt;userService-&gt;create($request-&gt;body());
+
+        // O resolver servicios dinámicamente cuando los necesites
+        $notificationService = $this-&gt;container-&gt;make(NotificationService::class);
+        $notificationService-&gt;sendWelcome($user);
+
+        return Response::json($user);
+    }
+}
+</code></pre>
+
+<p><strong>Ventajas en controladores:</strong>
+- Servicios disponibles automáticamente
+- Fácil testing con mocks
+- Código más limpio y legible
+- Flexibilidad para servicios dinámicos</p>
+
+<hr />
+
+<h2>Resolución de Métodos</h2>
+
+<p><strong>A veces no necesitas crear toda la clase, solo quieres ejecutar un método específico.</strong> El contenedor puede resolver las dependencias de métodos individuales.</p>
+
+<h3>Llamar métodos con inyección automática</h3>
+
+<p><strong>Es como pedirle al asistente que ejecute una tarea específica</strong> sin tener que crear toda la clase primero.</p>
+
+<pre><code class="language-php">class OrderProcessor
+{
+    public function processOrder(Order $order, User $user): void
+    {
+        // Lógica de procesamiento
+    }
+}
+
+// El contenedor resuelve automáticamente las dependencias del método
+$result = container()-&gt;call([OrderProcessor::class, 'processOrder'], [
+    'order' =&gt; $order,
+    'user' =&gt; $user
+]);
+</code></pre>
+
+<h3>Métodos estáticos</h3>
+
+<p><strong>Los métodos estáticos también pueden recibir dependencias.</strong> El contenedor puede resolver las dependencias incluso para métodos que no requieren instanciar la clase.</p>
+
+<pre><code class="language-php">class UtilityService
+{
+    public static function processData(array $data, Logger $logger): array
+    {
+        // Procesar datos usando el logger
+        $logger-&gt;info('Processing data...');
+        return array_map('strtoupper', $data);
+    }
+}
+
+// Resolver dependencias de método estático
+$result = container()-&gt;call('UtilityService::processData', [
+    'data' =&gt; ['hello', 'world']
+]);
+// El contenedor automáticamente inyecta Logger
+</code></pre>
+
+<p><strong>Casos de uso para métodos estáticos con DI:</strong>
+- Utilidades que no necesitan estado
+- Funciones helper con dependencias
+- Procesadores de datos</p>
+
+<h3>Closures con dependencias</h3>
+
+<p><strong>Incluso las funciones anónimas pueden recibir dependencias.</strong> Perfecto para tareas específicas o callbacks.</p>
+
+<pre><code class="language-php">$processor = function(Order $order, EmailService $emailService) {
+    $emailService-&gt;sendConfirmation($order);
+};
+
+// Resolver dependencias del closure
+container()-&gt;call($processor, ['order' =&gt; $order]);
+// El contenedor automáticamente inyecta EmailService
+</code></pre>
+
+<p><strong>Casos de uso para closures con DI:</strong>
+- Callbacks con dependencias
+- Tareas específicas
+- Procesadores de eventos
+- Funciones de filtrado</p>
+
+<hr />
+
+<h2>Configuración Avanzada</h2>
+
+<p><strong>Cuando necesitas más control sobre cómo se crean tus servicios,</strong> el contenedor te ofrece opciones avanzadas para casos específicos.</p>
+
+<h3>Binding con parámetros personalizados</h3>
+
+<p><strong>A veces necesitas pasar parámetros específicos</strong> que no están en el contenedor.</p>
+
+<pre><code class="language-php">class DatabaseService
+{
+    public function __construct(
+        private readonly string $host,
+        private readonly int $port,
+        private readonly string $database
+    ) {}
+}
+
+// Binding con parámetros específicos
+bind(DatabaseService::class, function($container) {
+    return new DatabaseService(
+        host: 'localhost',
+        port: 3306,
+        database: 'myapp'
+    );
+});
+</code></pre>
+
+<h3>Binding condicional</h3>
+
+<p><strong>A veces necesitas diferentes implementaciones según el entorno</strong> o configuración.</p>
+
+<pre><code class="language-php">class PaymentServiceProvider implements ServiceProviderInterface
+{
+    public function register(ContainerInterface $container): void
+    {
+        $container-&gt;bind(PaymentInterface::class, function($container) {
+            $environment = $container-&gt;make('config')['environment'];
+
+            return match($environment) {
+                'production' =&gt; new StripePayment(),    // Producción: Stripe real
+                'testing' =&gt; new MockPayment(),          // Testing: Mock
+                default =&gt; new SandboxPayment()          // Desarrollo: Sandbox
+            };
+        });
+    }
+}
+</code></pre>
+
+<p><strong>Casos de uso para binding condicional:</strong>
+- Diferentes servicios según entorno
+- Configuraciones específicas por usuario
+- Servicios premium vs gratuitos</p>
+
+<h3>Binding de arrays y configuraciones</h3>
+
+<p><strong>Las configuraciones también pueden ser servicios.</strong> Puedes registrar arrays, objetos de configuración y acceder a ellos fácilmente.</p>
+
+<pre><code class="language-php">class ConfigServiceProvider implements ServiceProviderInterface
+{
+    public function register(ContainerInterface $container): void
+    {
+        // Configuración de la aplicación
+        $container-&gt;instance('config', [
+            'app' =&gt; [
+                'name' =&gt; 'Mi Aplicación',
+                'debug' =&gt; true,
+                'timezone' =&gt; 'UTC'
+            ],
+            'database' =&gt; [
+                'host' =&gt; 'localhost',
+                'port' =&gt; 3306
+            ]
+        ]);
+
+        // Configuración específica como servicio
+        $container-&gt;bind('app.config', function($container) {
+            return $container-&gt;get('config')['app'];
+        });
+    }
+}
+
+// Usar en cualquier clase
+class MyService 
+{
+    public function __construct(
+        private readonly array $config,
+        private readonly array $appConfig
+    ) {
+        // $config contiene toda la configuración
+        // $appConfig contiene solo la configuración de la app
+    }
+}
+</code></pre>
+
+<p><strong>Ventajas de configuraciones como servicios:</strong>
+- Acceso fácil desde cualquier clase
+- Configuración centralizada
+- Fácil testing con configuraciones mock</p>
+
+<hr />
+
+<h2>Detección de Dependencias Circulares</h2>
+
+<p><strong>Una dependencia circular es como un círculo vicioso:</strong> A necesita B, B necesita A, y nunca se puede resolver. El contenedor detecta esto automáticamente y te avisa.</p>
+
+<h3>¿Qué es una dependencia circular?</h3>
+
+<pre><code class="language-php">class ServiceA
+{
+    public function __construct(private readonly ServiceB $serviceB) {}
+}
+
+class ServiceB
+{
+    public function __construct(private readonly ServiceA $serviceA) {}
+}
+
+// ❌ Esto crea un círculo infinito:
+// ServiceA necesita ServiceB
+// ServiceB necesita ServiceA
+// ServiceA necesita ServiceB...
+</code></pre>
+
+<h3>El contenedor te protege</h3>
+
+<pre><code class="language-php">// Esto lanzará una excepción automáticamente
+try {
+    $serviceA = container()-&gt;make(ServiceA::class);
+} catch (ContainerException $e) {
+    echo $e-&gt;getMessage(); // "Circular dependency detected while resolving: ServiceA"
+}
+</code></pre>
+
+<h3>Soluciones comunes</h3>
+
+<p><strong>1. Usar lazy loading:</strong></p>
+
+<pre><code class="language-php">class ServiceA 
+{
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {}
+
+    public function getServiceB(): ServiceB {
+        return $this-&gt;container-&gt;make(ServiceB::class);
+    }
+}
+</code></pre>
+
+<p><strong>2. Refactorizar la arquitectura:</strong></p>
+
+<pre><code class="language-php">// Crear un servicio común que ambos puedan usar
+class SharedService {}
+class ServiceA { public function __construct(private readonly SharedService $shared) {} }
+class ServiceB { public function __construct(private readonly SharedService $shared) {} }
+</code></pre>
+
+<hr />
+
+<h2>Testing con DI</h2>
+
+<p><strong>El DI hace el testing mucho más fácil.</strong> Puedes inyectar mocks fácilmente y probar cada componente de forma aislada.</p>
+
+<h3>Mocking de servicios</h3>
+
+<p><strong>En lugar de usar servicios reales en tus tests,</strong> puedes crear versiones "falsas" que simulen el comportamiento.</p>
+
+<pre><code class="language-php">class UserControllerTest
+{
+    public function testStoreUser(): void
+    {
+        // Crear mocks
+        $mockUserService = $this-&gt;createMock(UserService::class);
+        $mockEmailService = $this-&gt;createMock(EmailService::class);
+
+        // Configurar expectativas
+        $mockUserService-&gt;expects($this-&gt;once())
+            -&gt;method('create')
+            -&gt;willReturn(new User(['name' =&gt; 'Test User']));
+
+        // Registrar mocks en el contenedor
+        $container = new Container();
+        $container-&gt;instance(UserService::class, $mockUserService);
+        $container-&gt;instance(EmailService::class, $mockEmailService);
+
+        // Crear controlador con dependencias mockeadas
+        $controller = new UserController($mockUserService, $mockEmailService, $container);
+
+        // Ejecutar test
+        $request = new Request('POST', '/users', [], ['name' =&gt; 'Test User']);
+        $response = $controller-&gt;store($request);
+
+        $this-&gt;assertEquals(201, $response-&gt;status());
+    }
+}
+</code></pre>
+
+<h3>Testing de Service Providers</h3>
+
+<p><strong>Puedes probar que tus Service Providers registran correctamente los servicios.</strong></p>
+
+<pre><code class="language-php">class AppServiceProviderTest
+{
+    public function testRegistersServices(): void
+    {
+        $container = new Container();
+        $provider = new AppServiceProvider();
+
+        $provider-&gt;register($container);
+
+        // Verificar que los servicios están registrados
+        $this-&gt;assertTrue($container-&gt;has(EmailService::class));
+        $this-&gt;assertTrue($container-&gt;has('email'));
+
+        // Verificar que son singletons
+        $service1 = $container-&gt;make(EmailService::class);
+        $service2 = $container-&gt;make(EmailService::class);
+        $this-&gt;assertSame($service1, $service2);
+    }
+}
+</code></pre>
+
+<p><strong>Ventajas del testing con DI:</strong>
+- Tests más rápidos (no servicios reales)
+- Tests más confiables (comportamiento predecible)
+- Tests aislados (cada componente por separado)
+- Fácil debugging (sabes exactamente qué está pasando)</p>
+
+<hr />
+
+<h2>Integración con el Framework</h2>
+
+<p><strong>El DI está integrado en todos los componentes de Syverum.</strong> Cada parte del framework puede usar servicios inyectados automáticamente.</p>
+
+<h3>En controladores</h3>
+
+<p><strong>Los controladores son el lugar más común para usar DI.</strong> El framework resuelve automáticamente todas las dependencias.</p>
+
+<pre><code class="language-php">class ApiController
+{
+    public function __construct(
+        private readonly UserService $userService,
+        private readonly CacheService $cacheService,
+        private readonly Logger $logger
+    ) {}
+
+    public function index(): Response
+    {
+        $users = $this-&gt;cacheService-&gt;remember('users', 3600, function() {
+            return $this-&gt;userService-&gt;getAll();
+        });
+
+        return Response::json($users);
+    }
+}
+</code></pre>
+
+<h3>En middleware</h3>
+
+<p><strong>Los middleware también pueden usar servicios inyectados.</strong> Perfecto para autenticación, logging, y validaciones.</p>
+
+<pre><code class="language-php">class AuthMiddleware implements MiddlewareInterface
+{
+    public function __construct(
+        private readonly AuthService $authService,
+        private readonly Logger $logger
+    ) {}
+
+    public function process(callable $next): mixed
+    {
+        if (!$this-&gt;authService-&gt;isAuthenticated()) {
+            $this-&gt;logger-&gt;warning('Unauthorized access attempt');
+            return Response::html('Unauthorized', 401);
+        }
+
+        return $next();
+    }
+}
+</code></pre>
+
+<p><strong>Ventajas en middleware:</strong>
+- Servicios disponibles automáticamente
+- Fácil testing de middleware
+- Lógica de negocio separada</p>
+
+<h3>En modelos</h3>
+
+<p><strong>Los modelos también pueden recibir servicios inyectados.</strong> Útil para eventos, logging, y servicios de notificación.</p>
+
+<pre><code class="language-php">class User extends Model
+{
+    public function __construct(
+        array $attributes = [],
+        bool $exists = false,
+        private readonly ?EventDispatcher $events = null
+    ) {
+        parent::__construct($attributes, $exists);
+    }
+
+    public function save(): bool
+    {
+        $saved = parent::save();
+
+        if ($saved &amp;&amp; $this-&gt;events) {
+            $this-&gt;events-&gt;dispatch('user.saved', $this);
+        }
+
+        return $saved;
+    }
+}
+</code></pre>
+
+<p><strong>Casos de uso en modelos:</strong>
+- Disparar eventos cuando se guarda
+- Logging de cambios
+- Servicios de notificación
+- Validaciones complejas</p>
+
+<hr />
+
+<h2>Mejores Prácticas</h2>
+
+<div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-blue-700">
+                <strong>💡 Consejos para inyección de dependencias:</strong>
+            </p>
+            <ul class="text-sm text-blue-700 mt-2 list-disc list-inside">
+                <li><strong>Interfaces:</strong> Usa interfaces para desacoplar implementaciones</li>
+                <li><strong>Singletons:</strong> Usa singletons para servicios costosos (DB, Cache)</li>
+                <li><strong>Service Providers:</strong> Organiza bindings en Service Providers</li>
+                <li><strong>Constructor injection:</strong> Prefiere inyección por constructor</li>
+                <li><strong>Testing:</strong> Usa el contenedor para facilitar testing</li>
+                <li><strong>Configuración:</strong> Registra configuraciones como servicios</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h2>Debugging y Troubleshooting</h2>
+
+<p><strong>Cuando algo no funciona con DI, aquí tienes las herramientas para diagnosticar el problema.</strong></p>
+
+<h3>Verificar bindings</h3>
+
+<p><strong>Antes de resolver un servicio, verifica que esté registrado:</strong></p>
+
+<pre><code class="language-php">// Verificar si un servicio está registrado
+if (container()-&gt;has(MyService::class)) {
+    echo "✅ Servicio registrado";
+} else {
+    echo "❌ Servicio NO registrado";
+}
+
+// Obtener información de debug
+$container = container();
+// El contenedor interno mantiene información de bindings e instancias
+</code></pre>
+
+<h3>Errores comunes</h3>
+
+<p><strong>Error: "No entry found or resolvable"</strong></p>
+
+<pre><code class="language-php">// ❌ Clase no existe o no está registrada
+$service = container()-&gt;make('NonExistentClass');
+
+// ✅ Verificar que la clase existe
+if (class_exists('NonExistentClass')) {
+    $service = container()-&gt;make('NonExistentClass');
+}
+</code></pre>
+
+<p><strong>Error: "Circular dependency detected"</strong></p>
+
+<pre><code class="language-php">// ❌ Dependencia circular
+class A { public function __construct(B $b) {} }
+class B { public function __construct(A $a) {} }
+
+// ✅ Usar lazy loading o refactorizar
+class A { 
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {}
+
+    public function getB(): B {
+        return $this-&gt;container-&gt;make(B::class);
+    }
+}
+</code></pre>
+
+<h3>Consejos de debugging</h3>
+
+<ul>
+<li><strong>Usa <code>container()-&gt;has()</code></strong> para verificar registros</li>
+<li><strong>Revisa los Service Providers</strong> para asegurar que están cargados</li>
+<li><strong>Verifica las interfaces</strong> si usas binding de interfaces</li>
+<li><strong>Comprueba las dependencias circulares</strong> si tienes errores de resolución</li>
+</ul>
+
+<hr />
+
+<div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 text-center">
+    <p class="text-gray-700">
+        <strong>💡 Tip:</strong> El sistema de DI de Syverum es muy potente. Úsalo para crear aplicaciones modulares, testeables y mantenibles.
+    </p>
+</div>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <footer class="bg-white text-center text-sm mt-12 py-4 border-t-1 border-gray-300" role="contentinfo">
+        <ul class="flex flex-col md:flex-row justify-center">
+            <li class="md:mr-2">
+                &copy; <a href="https://github.com/Santiagomoo/syverum-framework" title="SyverumX en GitHub">Syverum</a>
+                2025.
+            </li>
+
+            <li>
+                Construido con <a href="https://jigsaw.tighten.com/docs/installation/" title="Framework Syverum">Tighten</a>
+                y <a href="https://tailwindcss.com" title="Tailwind CSS, un framework CSS utility-first">Tailwind
+                    CSS</a>.
+            </li>
+        </ul>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+    
+    <!-- Blade syntax highlighting for Prism.js -->
+    <script>
+        // Definir Blade como lenguaje personalizado para Prism.js
+        Prism.languages.blade = {
+            'comment': {
+                pattern: //,
+                greedy: true
+            },
+            'directive': {
+                pattern: /@(?:if|elseif|else|endif|foreach|endforeach|for|endfor|while|endwhile|switch|case|break|default|endswitch|include|extends|section|endsection|yield|csrf|method|php|endphp|verbatim|endverbatim|auth|endauth|guest|endguest|can|endcan|cannot|endcannot|hasSection|yieldContent|stack|push|endpush|prepend|endprepend|once|endonce|error|enderror|each|endeach|unless|endunless|empty|endempty|isset|endisset|lang|choice|trans|trans_choice|json|dd|dump|var_dump|abort|abort_if|abort_unless|action|asset|config|env|event|factory|info|logger|method_field|mix|old|public_path|report|request|rescue|resolve|session|tap|throw_if|throw_unless|today|tomorrow|trait_uses_recursive|trait_uses_recursive|trans|trans_choice|validator|view|with|without)\b/,
+                alias: 'keyword'
+            },
+            'variable': {
+                pattern: /\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'unescaped': {
+                pattern: /\{\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'string': {
+                pattern: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/,
+                greedy: true
+            },
+            'number': /\b\d+(?:\.\d+)?\b/,
+            'operator': /[+\-*\/%=!<>&|^~]/,
+            'punctuation': /[{}[\];(),.:]/
+        };
+        
+        // Registrar Blade como lenguaje
+        Prism.languages.markup.tag.addInlined('blade', 'blade');
+        
+        // Aplicar resaltado a todos los bloques de código Blade
+        document.addEventListener('DOMContentLoaded', function() {
+            const bladeBlocks = document.querySelectorAll('code.language-blade');
+            bladeBlocks.forEach(function(block) {
+                Prism.highlightElement(block);
+            });
+        });
+    </script>
+
+    <script>
+    const navMenu = {
+        toggle() {
+            const menu = document.getElementById('js-nav-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('lg:block');
+            document.getElementById('js-nav-menu-hide').classList.toggle('hidden');
+            document.getElementById('js-nav-menu-show').classList.toggle('hidden');
+        },
+    }
+</script>
+</body>
+
+</html>

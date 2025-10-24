@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Intercepta la petición antes del controlador con MiddlewareInterface.">
+    <meta name="description" content="Implementa middleware para procesar requests y responses de forma modular.">
 
     <meta property="og:site_name" content="Syverum Docs" />
-    <meta property="og:title" content="Middlewares | Syverum Docs" />
-    <meta property="og:description" content="Intercepta la petición antes del controlador con MiddlewareInterface." />
+    <meta property="og:title" content="Middleware | Syverum Docs" />
+    <meta property="og:description" content="Implementa middleware para procesar requests y responses de forma modular." />
     <meta property="og:url" content="https://santiagomoo.github.io/syverum-docs/docs/middlewares" />
     <meta property="og:image" content="https://santiagomoo.github.io/syverum-docs/assets/img/logo.png" />
     <meta property="og:type" content="website" />
@@ -18,7 +18,7 @@
     <meta name="twitter:card" content="summary_large_image">
 
     
-    <title>Syverum Docs | Middlewares</title>
+    <title>Syverum Docs | Middleware</title>
 
     <link rel="home" href="https://santiagomoo.github.io/syverum-docs/">
 
@@ -30,22 +30,24 @@
     <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet" />
 
-                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-BGAglPYt.css">
-    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-tKzq8g76.js"></script>
+                <link rel="stylesheet" href="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-Pbbc4FuM.css">
+    <script defer type="module" src="https://santiagomoo.github.io/syverum-docs/assets/build/assets/main-l0sNRNKZ.js"></script>
 
         <style>
         :root {
             --brand: #da1717ff;
             --brand-dark: #470e0eff;
             --sidebar-bg: #ffffff;
+            --transition: .4s ease-int-out;
         }
 
         a {
-            color: var(--brand);
+            transition: var(--transition);
         }
 
-        a:hover {
-            color: var(--brand-dark);
+        /* Apply hover effect only to links that are not buttons or logo */
+        :not(li) > a:not(.btn-primary):not(.btn-secondary):not(.logo-link):hover {
+            background: var(--brand-dark);
         }
 
         .nav-menu {
@@ -106,7 +108,7 @@
     <header class="flex items-center shadow-sm bg-white border-b h-24 mb-8 py-4" role="banner">
         <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
             <div class="flex items-center">
-                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="inline-flex items-center">
+                <a href="https://santiagomoo.github.io/syverum-docs/" title="Syverum Docs home" class="logo-link">
                 <img class="h-8 md:h-10 mr-3" src="https://santiagomoo.github.io/syverum-docs/assets/img/logo.svg" alt="Syverum Docs logo" />
                     <h1 class="text-lg md:text-2xl text-red-900 font-semibold hover:text-red-600 my-0 pr-4">
                         Syverum Docs</h1>
@@ -155,7 +157,7 @@
         <a href="https://santiagomoo.github.io/syverum-docs/docs/getting-started"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            ¿Qué es SyverumX?
+            ¿Qué es Syverum?
         </a>
     
     </li>
@@ -209,19 +211,19 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/views-blade"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/models"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            Vistas (Blade)
+            Modelos
         </a>
     
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/http-globals"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/views-blade"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            HTTP / Globals
+            Vistas (Blade)
         </a>
     
     </li>
@@ -236,24 +238,6 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/facades"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Facades
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/env-config"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Variables de entorno (.env)
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
         <a href="https://santiagomoo.github.io/syverum-docs/docs/database"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
@@ -263,28 +247,10 @@
     </li>
             <li class="pl-4">
             
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/panel-monitoring"
+        <a href="https://santiagomoo.github.io/syverum-docs/docs/dependency-injection"
             class="lvl1   nav-menu__item hover:text-red-500"
         >
-            Panel de monitoreo
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/cli"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            CLI
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/frontend-tailwind"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Frontend (Tailwind)
+            Inyección de dependencias
         </a>
     
     </li>
@@ -315,15 +281,6 @@
             class="lvl1   nav-menu__item hover:text-red-500"
         >
             FAQ
-        </a>
-    
-    </li>
-            <li class="pl-4">
-            
-        <a href="https://santiagomoo.github.io/syverum-docs/docs/releases"
-            class="lvl1   nav-menu__item hover:text-red-500"
-        >
-            Notas de versión
         </a>
     
     </li>
@@ -360,34 +317,718 @@
         </nav>
 
         <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
-            <h1>Middlewares</h1>
+            <h1>Middleware</h1>
 
-<p>Los middlewares implementan <code>Core\Http\Middleware\MiddlewareInterface</code> y se ejecutan antes del controlador. Úsalos para auth, logging o rate‑limit.</p>
+<div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-green-700">
+                <strong>Pipeline de Middleware:</strong> Syverum incluye un sistema robusto de middleware que te permite procesar requests y responses de forma modular, similar a Laravel pero más ligero.
+            </p>
+        </div>
+    </div>
+</div>
 
-<h2>Contrato y ejecución</h2>
+<p>El middleware en Syverum actúa como una capa intermedia entre el request y el controlador, permitiéndote ejecutar código antes y después de que se procese la petición. Es perfecto para autenticación, logging, CORS, validación y más.</p>
 
-<pre><code class="language-php">use Core\Http\Middleware\MiddlewareInterface;
+<hr />
+
+<h2>¿Qué es el Middleware?</h2>
+
+<p>El middleware es código que se ejecuta <strong>antes</strong> de que tu controlador procese la petición. Puedes tener múltiples middleware ejecutándose en secuencia, creando un "pipeline" de procesamiento.</p>
+
+<pre><code>Request → Middleware 1 → Middleware 2 → Middleware 3 → Controller → Response
+</code></pre>
+
+<hr />
+
+<h2>Crear Middleware</h2>
+
+<h2>Middleware con interfaz</h2>
+
+<p>Esta es la forma más robusta y recomendada para crear middleware en Syverum. Al implementar la interfaz <code>MiddlewareInterface</code>, garantizas que tu middleware tenga la estructura correcta y sea compatible con el sistema de middleware del framework.</p>
+
+<p><strong>Ventajas de usar la interfaz:</strong>
+- <strong>Type safety</strong>: PHP puede verificar que implementas correctamente el método <code>process()</code>
+- <strong>Consistencia</strong>: Todos los middleware siguen el mismo patrón
+- <strong>IDE support</strong>: Mejor autocompletado y detección de errores
+- <strong>Testing</strong>: Más fácil de testear y mockear</p>
+
+<p>El método <code>process()</code> recibe un callable <code>$next</code> que representa el siguiente middleware o controlador en el pipeline. Debes llamarlo para continuar la ejecución.</p>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Http\Middleware;
+
+use Core\Support\Middleware\Contracts\MiddlewareInterface;
+use Core\Support\Http\Response;
 
 class AuthMiddleware implements MiddlewareInterface
 {
-    public function handle(callable $next)
+    public function process(callable $next): mixed
     {
-        if (!isset($_SESSION['user'])) {
-            header('Location: /login');
-            exit;
+        // Lógica antes del controlador
+        if (!$this-&gt;isAuthenticated()) {
+            return Response::html('No autorizado', 401);
         }
+
+        // Continuar al siguiente middleware/controlador
+        $response = $next();
+
+        // Lógica después del controlador (opcional)
+        $this-&gt;logAccess();
+
+        return $response;
+    }
+
+    private function isAuthenticated(): bool
+    {
+        // Implementar lógica de autenticación
+        return isset($_SESSION['user_id']);
+    }
+
+    private function logAccess(): void
+    {
+        // Log del acceso
+        error_log('Usuario autenticado accedió a la ruta');
+    }
+}
+</code></pre>
+
+<h2>Middleware como función</h2>
+
+<p>Para casos simples o middleware rápidos, puedes usar una función simple en lugar de una clase. Esta aproximación es más ligera pero menos flexible que usar una clase.</p>
+
+<p><strong>Cuándo usar funciones:</strong>
+- <strong>Middleware simples</strong>: Para lógica básica como logging o headers
+- <strong>Prototipado rápido</strong>: Para probar ideas rápidamente
+- <strong>Middleware específicos</strong>: Que solo se usan en un lugar</p>
+
+<p><strong>Limitaciones:</strong>
+- No puedes usar inyección de dependencias
+- Más difícil de testear
+- No puedes mantener estado entre requests
+- Menos organizado para proyectos grandes</p>
+
+<pre><code class="language-php">&lt;?php
+
+use Core\Support\Http\Response;
+
+function LogMiddleware(callable $next): mixed
+{
+    $startTime = microtime(true);
+
+    // Log del request
+    error_log('Request iniciado: ' . $_SERVER['REQUEST_URI']);
+
+    $response = $next();
+
+    // Log del response
+    $duration = microtime(true) - $startTime;
+    error_log('Request completado en: ' . $duration . 's');
+
+    return $response;
+}
+</code></pre>
+
+<h2>Middleware como clase callable</h2>
+
+<p>Esta aproximación combina la flexibilidad de las clases con la simplicidad de las funciones. Al implementar el método mágico <code>__invoke()</code>, tu clase se convierte en un callable que puede ser usado directamente como middleware.</p>
+
+<p><strong>Ventajas de usar <code>__invoke()</code>:</strong>
+- <strong>Flexibilidad</strong>: Puedes usar constructores para inyección de dependencias
+- <strong>Simplicidad</strong>: No necesitas implementar interfaces
+- <strong>Reutilización</strong>: Puedes instanciar la clase y usar el objeto múltiples veces
+- <strong>Estado</strong>: Puedes mantener propiedades de la clase</p>
+
+<p><strong>Cuándo usar esta aproximación:</strong>
+- Cuando necesitas inyección de dependencias pero no quieres implementar interfaces
+- Para middleware que necesitan configuración inicial
+- Cuando quieres mantener estado entre requests</p>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Http\Middleware;
+
+use Core\Support\Http\Response;
+
+class CorsMiddleware
+{
+    public function __invoke(callable $next): mixed
+    {
+        // Headers CORS
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
+        // Manejar preflight requests
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            return Response::html('', 200);
+        }
+
         return $next();
     }
 }
 </code></pre>
 
-<p>Asigna el middleware a una ruta:</p>
+<hr />
 
-<pre><code class="language-php">Route::get('/admin', [AdminController::class, 'dashboard'])
-    -&gt;middleware('AuthMiddleware');
+<h2>Registrar Middleware</h2>
+
+<p>Antes de poder usar middleware en tus rutas, necesitas registrarlos en el sistema. Syverum te ofrece varias formas de hacerlo, desde aliases simples hasta middleware globales que se ejecutan automáticamente.</p>
+
+<p><strong>Tipos de registro:</strong>
+- <strong>Aliases</strong>: Nombres cortos para referenciar middleware
+- <strong>Globales</strong>: Middleware que se ejecutan en todas las rutas
+- <strong>Directos</strong>: Usar clases directamente sin registro previo</p>
+
+<h2>Usando aliases</h2>
+
+<p>Los aliases te permiten usar nombres cortos y memorables para tus middleware en lugar de escribir el nombre completo de la clase cada vez.</p>
+
+<p><strong>Ventajas de los aliases:</strong>
+- <strong>Legibilidad</strong>: <code>'auth'</code> es más claro que <code>AuthMiddleware::class</code>
+- <strong>Mantenibilidad</strong>: Puedes cambiar la clase sin afectar las rutas
+- <strong>Consistencia</strong>: Mismo nombre en toda la aplicación
+- <strong>Flexibilidad</strong>: Puedes cambiar la implementación fácilmente</p>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Providers;
+
+use Core\Support\DI\Contracts\ContainerInterface;
+use Core\Support\DI\Contracts\ServiceProviderInterface;
+use Core\Application\Middleware\Handler;
+use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\CorsMiddleware;
+
+class MiddlewareServiceProvider implements ServiceProviderInterface
+{
+    public function register(ContainerInterface $container): void
+    {
+        $container-&gt;singleton(Handler::class, function () use ($container) {
+            $handler = new Handler($container);
+
+            // Registrar aliases de middleware
+            $handler-&gt;alias('auth', AuthMiddleware::class);
+            $handler-&gt;alias('cors', CorsMiddleware::class);
+            $handler-&gt;alias('log', LogMiddleware::class);
+            $handler-&gt;alias('admin', AdminMiddleware::class);
+
+            return $handler;
+        });
+    }
+}
 </code></pre>
 
-<p><code>MiddlewareRunner</code> instancia la clase bajo <code>App\Http\Middleware\{Nombre}</code>.</p>
+<h2>Middleware global</h2>
+
+<p>Los middleware globales se ejecutan automáticamente en todas las rutas de tu aplicación, sin necesidad de especificarlos individualmente. Son perfectos para funcionalidades transversales como CORS, logging, o headers de seguridad.</p>
+
+<p><strong>Cuándo usar middleware globales:</strong>
+- <strong>CORS</strong>: Para APIs que necesitan acceso desde diferentes dominios
+- <strong>Logging</strong>: Para registrar todas las peticiones
+- <strong>Seguridad</strong>: Headers de seguridad que deben aplicarse siempre
+- <strong>Performance</strong>: Middleware de caché o compresión</p>
+
+<p><strong>Consideraciones importantes:</strong>
+- Se ejecutan en TODAS las rutas, incluyendo errores 404
+- Pueden afectar el rendimiento si son muy pesados
+- El orden de ejecución es importante
+- Algunos middleware pueden no ser apropiados para todas las rutas</p>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Providers;
+
+use Core\Support\DI\Contracts\ContainerInterface;
+use Core\Support\DI\Contracts\ServiceProviderInterface;
+use Core\Application\Middleware\Handler;
+
+class MiddlewareServiceProvider implements ServiceProviderInterface
+{
+    public function register(ContainerInterface $container): void
+    {
+        $container-&gt;singleton(Handler::class, function () use ($container) {
+            $handler = new Handler($container);
+
+            // Middleware globales
+            $handler-&gt;alias('global.cors', CorsMiddleware::class);
+            $handler-&gt;alias('global.log', LogMiddleware::class);
+
+            return $handler;
+        });
+    }
+}
+</code></pre>
+
+<hr />
+
+<h2>Usar Middleware en Rutas</h2>
+
+<p>Una vez registrados tus middleware, puedes aplicarlos a rutas específicas o grupos de rutas. Syverum te ofrece flexibilidad total para controlar exactamente dónde y cómo se ejecutan tus middleware.</p>
+
+<p><strong>Estrategias de aplicación:</strong>
+- <strong>Individual</strong>: Un middleware por ruta
+- <strong>Múltiples</strong>: Varios middleware en secuencia
+- <strong>Condicional</strong>: Middleware que se aplican según condiciones
+- <strong>Grupos</strong>: Middleware compartidos entre rutas relacionadas</p>
+
+<h2>Middleware individual</h2>
+
+<p>La forma más simple de aplicar middleware es uno por ruta. Es perfecto para casos donde solo necesitas una funcionalidad específica.</p>
+
+<p><strong>Casos de uso comunes:</strong>
+- <strong>Autenticación</strong>: Solo en rutas protegidas
+- <strong>Validación</strong>: Solo en rutas que reciben datos
+- <strong>Autorización</strong>: Solo en rutas administrativas</p>
+
+<pre><code class="language-php">&lt;?php
+// routes/web.php
+
+use App\Controllers\UserController;
+
+// Middleware en ruta individual
+Route::get('/admin/users', [UserController::class, 'index'])
+    -&gt;middleware('auth')
+    -&gt;name('admin.users');
+
+Route::post('/admin/users', [UserController::class, 'store'])
+    -&gt;middleware('auth', 'admin')
+    -&gt;name('admin.users.store');
+</code></pre>
+
+<h2>Múltiples middleware</h2>
+
+<p>Cuando necesitas aplicar varios middleware a una ruta, puedes especificarlos en el orden que quieres que se ejecuten. El orden es crucial porque cada middleware puede depender del anterior.</p>
+
+<p><strong>Consideraciones del orden:</strong>
+- <strong>CORS primero</strong>: Para manejar preflight requests
+- <strong>Logging temprano</strong>: Para registrar todo el proceso
+- <strong>Autenticación antes de autorización</strong>: Verificar identidad antes de permisos
+- <strong>Validación antes del controlador</strong>: Asegurar datos válidos</p>
+
+<p><strong>Patrones comunes:</strong>
+- <code>cors → log → auth → admin</code> (API administrativa)
+- <code>cors → log → auth</code> (API protegida)
+- <code>log → validate → controller</code> (Formularios)</p>
+
+<pre><code class="language-php">&lt;?php
+// routes/web.php
+
+// Múltiples middleware en una ruta
+Route::get('/api/users', [UserController::class, 'index'])
+    -&gt;middleware('cors', 'auth', 'log')
+    -&gt;name('api.users');
+
+Route::post('/api/users', [UserController::class, 'store'])
+    -&gt;middleware('cors', 'auth', 'admin', 'log')
+    -&gt;name('api.users.store');
+</code></pre>
+
+<h2>Middleware con clases directas</h2>
+
+<p>A veces prefieres usar las clases directamente sin registrarlas como aliases. Esto es útil cuando tienes middleware específicos que solo se usan una vez o cuando quieres ser explícito sobre qué clase se está usando.</p>
+
+<p><strong>Cuándo usar clases directas:</strong>
+- <strong>Middleware específicos</strong>: Que solo se usan en una ruta
+- <strong>Testing</strong>: Para usar mocks o stubs específicos
+- <strong>Claridad</strong>: Cuando quieres ser explícito sobre la implementación
+- <strong>Configuración</strong>: Cuando necesitas pasar parámetros al constructor</p>
+
+<p><strong>Ventajas:</strong>
+- <strong>Explícito</strong>: Sabes exactamente qué clase se ejecuta
+- <strong>Flexible</strong>: Puedes instanciar con parámetros específicos
+- <strong>Sin registro</strong>: No necesitas registrarlos previamente</p>
+
+<pre><code class="language-php">&lt;?php
+// routes/web.php
+
+use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\AdminMiddleware;
+
+// Usar clases directamente
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+    -&gt;middleware(AuthMiddleware::class, AdminMiddleware::class)
+    -&gt;name('admin.dashboard');
+</code></pre>
+
+<hr />
+
+<h2>Ejemplos de Middleware Comunes</h2>
+
+<h2>Middleware de Autenticación</h2>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Http\Middleware;
+
+use Core\Support\Middleware\Contracts\MiddlewareInterface;
+use Core\Support\Http\Response;
+
+class AuthMiddleware implements MiddlewareInterface
+{
+    public function process(callable $next): mixed
+    {
+        if (!$this-&gt;checkAuth()) {
+            return Response::html('
+                &lt;h1&gt;Acceso Denegado&lt;/h1&gt;
+                &lt;p&gt;Debes iniciar sesión para acceder a esta página.&lt;/p&gt;
+                &lt;a href="/login"&gt;Iniciar Sesión&lt;/a&gt;
+            ', 401);
+        }
+
+        return $next();
+    }
+
+    private function checkAuth(): bool
+    {
+        // Verificar sesión
+        if (!isset($_SESSION['user_id'])) {
+            return false;
+        }
+
+        // Verificar token JWT (opcional)
+        if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            $token = str_replace('Bearer ', '', $_SERVER['HTTP_AUTHORIZATION']);
+            return $this-&gt;validateJWT($token);
+        }
+
+        return true;
+    }
+
+    private function validateJWT(string $token): bool
+    {
+        // Implementar validación JWT
+        return !empty($token);
+    }
+}
+</code></pre>
+
+<h2>Middleware de Administrador</h2>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Http\Middleware;
+
+use Core\Support\Middleware\Contracts\MiddlewareInterface;
+use Core\Support\Http\Response;
+
+class AdminMiddleware implements MiddlewareInterface
+{
+    public function process(callable $next): mixed
+    {
+        if (!$this-&gt;isAdmin()) {
+            return Response::html('
+                &lt;h1&gt;Acceso Denegado&lt;/h1&gt;
+                &lt;p&gt;No tienes permisos de administrador.&lt;/p&gt;
+            ', 403);
+        }
+
+        return $next();
+    }
+
+    private function isAdmin(): bool
+    {
+        if (!isset($_SESSION['user_id'])) {
+            return false;
+        }
+
+        // Verificar rol de usuario
+        $userRole = $_SESSION['user_role'] ?? 'user';
+        return $userRole === 'admin';
+    }
+}
+</code></pre>
+
+<h2>Middleware de Logging</h2>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Http\Middleware;
+
+use Core\Support\Middleware\Contracts\MiddlewareInterface;
+
+class LogMiddleware implements MiddlewareInterface
+{
+    public function process(callable $next): mixed
+    {
+        $startTime = microtime(true);
+        $requestId = uniqid('req_');
+
+        // Log del request
+        $this-&gt;log('REQUEST', [
+            'id' =&gt; $requestId,
+            'method' =&gt; $_SERVER['REQUEST_METHOD'],
+            'uri' =&gt; $_SERVER['REQUEST_URI'],
+            'ip' =&gt; $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+            'user_agent' =&gt; $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
+        ]);
+
+        $response = $next();
+
+        // Log del response
+        $duration = microtime(true) - $startTime;
+        $this-&gt;log('RESPONSE', [
+            'id' =&gt; $requestId,
+            'duration' =&gt; round($duration, 4),
+            'status' =&gt; $response-&gt;status() ?? 200
+        ]);
+
+        return $response;
+    }
+
+    private function log(string $type, array $data): void
+    {
+        $logEntry = date('Y-m-d H:i:s') . " [{$type}] " . json_encode($data) . PHP_EOL;
+        file_put_contents('storage/logs/app.log', $logEntry, FILE_APPEND);
+    }
+}
+</code></pre>
+
+<h2>Middleware de CORS</h2>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Http\Middleware;
+
+use Core\Support\Middleware\Contracts\MiddlewareInterface;
+use Core\Support\Http\Response;
+
+class CorsMiddleware implements MiddlewareInterface
+{
+    public function process(callable $next): mixed
+    {
+        // Headers CORS
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+        header('Access-Control-Max-Age: 86400');
+
+        // Manejar preflight requests
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            return Response::html('', 200);
+        }
+
+        return $next();
+    }
+}
+</code></pre>
+
+<h2>Middleware de Rate Limiting</h2>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Http\Middleware;
+
+use Core\Support\Middleware\Contracts\MiddlewareInterface;
+use Core\Support\Http\Response;
+
+class RateLimitMiddleware implements MiddlewareInterface
+{
+    private int $maxRequests = 100;
+    private int $timeWindow = 3600; // 1 hora
+
+    public function process(callable $next): mixed
+    {
+        $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        $key = "rate_limit_{$ip}";
+
+        if (!$this-&gt;checkRateLimit($key)) {
+            return Response::html('
+                &lt;h1&gt;Demasiadas solicitudes&lt;/h1&gt;
+                &lt;p&gt;Has excedido el límite de solicitudes. Intenta más tarde.&lt;/p&gt;
+            ', 429);
+        }
+
+        return $next();
+    }
+
+    private function checkRateLimit(string $key): bool
+    {
+        $file = "storage/cache/{$key}.json";
+
+        if (!file_exists($file)) {
+            $this-&gt;createRateLimitFile($file);
+            return true;
+        }
+
+        $data = json_decode(file_get_contents($file), true);
+        $now = time();
+
+        // Limpiar requests antiguos
+        $data['requests'] = array_filter($data['requests'], function($timestamp) use ($now) {
+            return ($now - $timestamp) &lt; $this-&gt;timeWindow;
+        });
+
+        if (count($data['requests']) &gt;= $this-&gt;maxRequests) {
+            return false;
+        }
+
+        // Agregar nuevo request
+        $data['requests'][] = $now;
+        file_put_contents($file, json_encode($data));
+
+        return true;
+    }
+
+    private function createRateLimitFile(string $file): void
+    {
+        $data = [
+            'requests' =&gt; [time()]
+        ];
+        file_put_contents($file, json_encode($data));
+    }
+}
+</code></pre>
+
+<hr />
+
+<h2>Middleware con Inyección de Dependencias</h2>
+
+<p>Una de las ventajas más poderosas de usar clases para middleware es la capacidad de usar inyección de dependencias. Esto te permite acceder a servicios del contenedor de dependencias, como bases de datos, loggers, o cualquier otro servicio registrado.</p>
+
+<p><strong>Beneficios de la inyección de dependencias:</strong>
+- <strong>Acceso a servicios</strong>: Puedes usar cualquier servicio registrado en el contenedor
+- <strong>Testing</strong>: Fácil de mockear dependencias para pruebas
+- <strong>Flexibilidad</strong>: Puedes cambiar implementaciones sin modificar el middleware
+- <strong>Reutilización</strong>: El mismo middleware puede usar diferentes servicios según el contexto</p>
+
+<p><strong>Servicios comunes en middleware:</strong>
+- <strong>Database</strong>: Para logging o validación de datos
+- <strong>Logger</strong>: Para logging estructurado
+- <strong>Cache</strong>: Para rate limiting o caché de sesiones
+- <strong>Config</strong>: Para configuración específica del middleware</p>
+
+<pre><code class="language-php">&lt;?php
+
+
+namespace App\Http\Middleware;
+
+use Core\Support\Middleware\Contracts\MiddlewareInterface;
+use Core\Support\DI\Contracts\ContainerInterface;
+use Core\Support\Http\Response;
+
+class DatabaseLogMiddleware implements MiddlewareInterface
+{
+    public function __construct(
+        private readonly ContainerInterface $container
+    ) {}
+
+    public function process(callable $next): mixed
+    {
+        // Acceder a servicios del contenedor
+        $database = $this-&gt;container-&gt;make(\Core\Services\Database\Database::class);
+
+        // Log a base de datos
+        $this-&gt;logToDatabase($database);
+
+        return $next();
+    }
+
+    private function logToDatabase($database): void
+    {
+        $database-&gt;statement(
+            'INSERT INTO request_logs (method, uri, ip, created_at) VALUES (?, ?, ?, ?)',
+            [
+                $_SERVER['REQUEST_METHOD'],
+                $_SERVER['REQUEST_URI'],
+                $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+                date('Y-m-d H:i:s')
+            ]
+        );
+    }
+}
+</code></pre>
+
+<hr />
+
+<h2>Orden de Ejecución</h2>
+
+<p>El orden en que defines tus middleware es crucial porque determina la secuencia de ejecución. Cada middleware puede depender del trabajo realizado por los anteriores, y algunos middleware deben ejecutarse antes que otros para funcionar correctamente.</p>
+
+<p><strong>Principios del orden de ejecución:</strong>
+- <strong>De izquierda a derecha</strong>: El primer middleware se ejecuta primero
+- <strong>Pipeline unidireccional</strong>: Los middleware se ejecutan en orden hacia el controlador
+- <strong>Retorno en orden inverso</strong>: Las respuestas pasan por los middleware en orden inverso
+- <strong>Interrupción posible</strong>: Cualquier middleware puede detener la ejecución</p>
+
+<p><strong>Orden recomendado por tipo:</strong>
+1. <strong>CORS</strong>: Debe ser el primero para manejar preflight requests
+2. <strong>Logging</strong>: Para registrar todo el proceso desde el inicio
+3. <strong>Rate Limiting</strong>: Para proteger contra abuso antes de procesar
+4. <strong>Autenticación</strong>: Para verificar identidad del usuario
+5. <strong>Autorización</strong>: Para verificar permisos específicos
+6. <strong>Validación</strong>: Para validar datos antes del controlador
+7. <strong>Controlador</strong>: El punto final del pipeline</p>
+
+<pre><code class="language-php">&lt;?php
+// routes/web.php
+
+// El orden importa:
+Route::get('/admin/users', [UserController::class, 'index'])
+    -&gt;middleware('cors', 'log', 'auth', 'admin')
+    -&gt;name('admin.users');
+
+// Orden de ejecución:
+// 1. CorsMiddleware
+// 2. LogMiddleware  
+// 3. AuthMiddleware
+// 4. AdminMiddleware
+// 5. UserController@index
+</code></pre>
+
+<hr />
+
+<h2>Mejores Prácticas</h2>
+
+<div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+    <div class="flex">
+        <div class="ml-3">
+            <p class="text-sm text-blue-700">
+                <strong>💡 Consejos para middleware:</strong>
+            </p>
+            <ul class="text-sm text-blue-700 mt-2 list-disc list-inside">
+                <li><strong>Orden lógico:</strong> Coloca middleware generales primero (CORS, logging)</li>
+                <li><strong>Autenticación temprana:</strong> Verifica autenticación antes de middleware específicos</li>
+                <li><strong>Respuestas claras:</strong> Devuelve mensajes de error claros y útiles</li>
+                <li><strong>Logging:</strong> Registra eventos importantes para debugging</li>
+                <li><strong>Performance:</strong> Evita operaciones costosas en middleware</li>
+                <li><strong>Reutilización:</strong> Crea middleware genéricos y reutilizables</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h2>Siguiente paso</h2>
+
+<div class="text-center">
+    <a href="/docs/database" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
+        Base de datos
+        <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </a>
+</div>
+
+<hr />
+
+<div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 text-center">
+    <p class="text-gray-700">
+        <strong>💡 Tip:</strong> El middleware en Syverum te permite crear aplicaciones seguras y robustas. Úsalo para autenticación, logging, CORS y más funcionalidades transversales.
+    </p>
+</div>
         </div>
     </div>
 </section>
@@ -411,6 +1052,51 @@ class AuthMiddleware implements MiddlewareInterface
     <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+    
+    <!-- Blade syntax highlighting for Prism.js -->
+    <script>
+        // Definir Blade como lenguaje personalizado para Prism.js
+        Prism.languages.blade = {
+            'comment': {
+                pattern: //,
+                greedy: true
+            },
+            'directive': {
+                pattern: /@(?:if|elseif|else|endif|foreach|endforeach|for|endfor|while|endwhile|switch|case|break|default|endswitch|include|extends|section|endsection|yield|csrf|method|php|endphp|verbatim|endverbatim|auth|endauth|guest|endguest|can|endcan|cannot|endcannot|hasSection|yieldContent|stack|push|endpush|prepend|endprepend|once|endonce|error|enderror|each|endeach|unless|endunless|empty|endempty|isset|endisset|lang|choice|trans|trans_choice|json|dd|dump|var_dump|abort|abort_if|abort_unless|action|asset|config|env|event|factory|info|logger|method_field|mix|old|public_path|report|request|rescue|resolve|session|tap|throw_if|throw_unless|today|tomorrow|trait_uses_recursive|trait_uses_recursive|trans|trans_choice|validator|view|with|without)\b/,
+                alias: 'keyword'
+            },
+            'variable': {
+                pattern: /\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'unescaped': {
+                pattern: /\{\{\{\s*\$[a-zA-Z_][a-zA-Z0-9_]*(?:\.[a-zA-Z_][a-zA-Z0-9_]*)*\s*\}\}\}/,
+                inside: {
+                    'punctuation': /[{}]/
+                }
+            },
+            'string': {
+                pattern: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/,
+                greedy: true
+            },
+            'number': /\b\d+(?:\.\d+)?\b/,
+            'operator': /[+\-*\/%=!<>&|^~]/,
+            'punctuation': /[{}[\];(),.:]/
+        };
+        
+        // Registrar Blade como lenguaje
+        Prism.languages.markup.tag.addInlined('blade', 'blade');
+        
+        // Aplicar resaltado a todos los bloques de código Blade
+        document.addEventListener('DOMContentLoaded', function() {
+            const bladeBlocks = document.querySelectorAll('code.language-blade');
+            bladeBlocks.forEach(function(block) {
+                Prism.highlightElement(block);
+            });
+        });
+    </script>
 
     <script>
     const navMenu = {
